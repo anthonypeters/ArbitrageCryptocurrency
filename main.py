@@ -11,6 +11,7 @@ import numpy as np
 # Non compatible exchanges: ['binanceje', 'braziliex', 'btcchina', 'bitfinex', 'bitfinex2', 'bittrex', 'chilebit', 'btcturk',
 # 'fcoinjp', 'coinmarketcap', 'gateio', 'huobipro', 'huobiru', 'indodax', 'btctradeua', 'zaif', 'zb', 'yobit', 'xbtce', '_1btcxe',
 # 'bibox', 'bitmex', 'bitstamp1', 'bitz', 'poloniex', 'theocean']
+
 exchanges = ['acx', 'adara', 'allcoin', 'anxpro', 'bcex', 'bequant', 'bigone', 'binance',
              'binanceus', 'bit2c', 'bitbank', 'bitbay', 'bitflyer', 'bitforex', 'bithumb', 'bitkk', 'bitlish',
              'bitmart', 'bitmax', 'bitso', 'bitstamp', 'bl3p', 'bleutrade',
@@ -23,6 +24,7 @@ exchanges = ['acx', 'adara', 'allcoin', 'anxpro', 'bcex', 'bequant', 'bigone', '
              'okcoincny', 'okcoinusd', 'okex', 'okex3', 'paymium', 'rightbtc', 'southxchange', 'stex',
              'stronghold', 'surbitcoin', 'therock', 'tidebit', 'tidex', 'timex', 'upbit', 'vaultoro',
              'vbtc', 'whitebit']
+
 fee = 0.25
 
 clients = [getattr(ccxt, e.lower())() for e in exchanges]
@@ -62,4 +64,5 @@ for i, symbol in enumerate(currency_pairs):
                     opportunities.append([symbol, exchange1, ask[i, j1], exchange2, bid[i, j2], round(roi, 2)])
 
 print("Number of profitable opportunities:", len(opportunities))
-print(opportunities)
+for elem in opportunities:
+    print(elem)
