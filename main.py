@@ -1,5 +1,5 @@
 # Arbitrage Cryptocurrency
-# Use of Bellman-Ford Algorithm
+# Use of Bellman-Ford Algorithm or Dijkstra's Algorithm
 # Use of CCXT Library
 # Use of sorting algorithm
 
@@ -8,11 +8,13 @@
 import ccxt
 import numpy as np
 
+# Non compatible exchanges: ['binanceje', 'braziliex', 'btcchina', 'bitfinex', 'bitfinex2', 'bittrex', 'chilebit', 'btcturk',
+# 
 exchanges = ['_1btcxe', 'acx', 'adara', 'allcoin', 'anxpro', 'bcex', 'bequant', 'bibox', 'bigone',
-             'binance', 'binanceje', 'binanceus', 'bit2c', 'bitbank', 'bitbay', 'bitfinex', 'bitfinex2','bitflyer', 'bitforex', 'bithumb', 'bitkk', 'bitlish', 'bitmart', 'bitmax', 'bitmex', 'bitso',
-             'bitstamp', 'bitstamp1', 'bittrex', 'bitz', 'bl3p', 'bleutrade', 'braziliex', 'btcalpha', 'btcbox',
-             'btcchina', 'btcmarkets', 'btctradeim', 'btctradeua', 'btcturk', 'buda', 'bw', 'bytetrade', 'cex',
-             'chilebit', 'cobinhood', 'coinbase', 'coinbaseprime', 'coinbasepro', 'coincheck', 'coinegg', 'coinex',
+             'binance',  'binanceus', 'bit2c', 'bitbank', 'bitbay', 'bitflyer', 'bitforex',
+             'bithumb', 'bitkk', 'bitlish', 'bitmart', 'bitmax', 'bitmex', 'bitso', 'bitstamp', 'bitstamp1', 'bitz', 'bl3p', 'bleutrade', 'btcalpha', 'btcbox',
+              'btcmarkets', 'btctradeim', 'btctradeua', 'buda', 'bw', 'bytetrade', 'cex',
+             'cobinhood', 'coinbase', 'coinbaseprime', 'coinbasepro', 'coincheck', 'coinegg', 'coinex',
              'coinfalcon', 'coinfloor', 'coingi', 'coinmarketcap', 'coinmate', 'coinone', 'coinspot', 'coolcoin', 'coss',
              'crex24', 'deribit', 'digifinex', 'dsx', 'exmo', 'exx', 'fcoin', 'fcoinjp', 'flowbtc', 'foxbit', 'ftx', 'fybse',
              'gateio', 'gemini', 'hitbtc', 'hitbtc2', 'huobipro', 'huobiru', 'ice3x', 'idex', 'independentreserve', 'indodax',
@@ -55,3 +57,4 @@ for i, symbol in enumerate(currency_pairs):
                     opportunities.append([symbol, exchange1, ask[i, j1], exchange2, bid[i, j2], round(roi, 2)])
 
 print("Number of profitable opportunities:", len(opportunities))
+print(opportunities)
