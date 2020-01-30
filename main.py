@@ -1,7 +1,7 @@
 # Arbitrage Cryptocurrency
 # Use of Bellman-Ford Algorithm or Dijkstra's Algorithm
-# Use of CCXT Library
 # Use of sorting algorithm
+# Use of CCXT Library
 
 # Anthony Peters, Franz Nastor, Peter Radev, Jack Hudanick, Tim Abbenhaus, Collin Jones
 
@@ -10,32 +10,33 @@ import numpy as np
 
 # Non compatible exchanges: ['binanceje', 'braziliex', 'btcchina', 'bitfinex', 'bitfinex2', 'bittrex', 'chilebit', 'btcturk',
 # 'fcoinjp', 'coinmarketcap', 'gateio', 'huobipro', 'huobiru', 'indodax', 'btctradeua', 'zaif', 'zb', 'yobit', 'xbtce', '_1btcxe',
-# 'bibox', 'bitmex', 'bitstamp1', 'bitz', 'poloniex', 'theocean']
+# 'bibox', 'bitmex', 'bitstamp1', 'bitz', 'poloniex', 'theocean', 'btcalpha', 'fybse']
 
 exchanges = ['acx', 'adara', 'allcoin', 'anxpro', 'bcex', 'bequant', 'bigone', 'binance',
              'binanceus', 'bit2c', 'bitbank', 'bitbay', 'bitflyer', 'bitforex', 'bithumb', 'bitkk', 'bitlish',
              'bitmart', 'bitmax', 'bitso', 'bitstamp', 'bl3p', 'bleutrade',
-             'btcalpha', 'btcbox', 'btcmarkets', 'btctradeim', 'buda', 'bw', 'bytetrade', 'cex',
+              'btcbox', 'btcmarkets', 'btctradeim', 'buda', 'bw', 'bytetrade', 'cex',
              'cobinhood', 'coinbase', 'coinbaseprime', 'coinbasepro', 'coincheck', 'coinegg', 'coinex',
              'coinfalcon', 'coinfloor', 'coingi',  'coinmate', 'coinone', 'coinspot', 'coolcoin', 'coss',
-             'crex24', 'deribit', 'digifinex', 'dsx', 'exmo', 'exx', 'fcoin',  'flowbtc', 'foxbit', 'ftx', 'fybse',
+             'crex24', 'deribit', 'digifinex', 'dsx', 'exmo', 'exx', 'fcoin',  'flowbtc', 'foxbit', 'ftx',
              'gemini', 'hitbtc', 'hitbtc2', 'ice3x', 'idex', 'independentreserve', 'itbit', 'kkex', 'kraken', 'kucoin',
              'kuna', 'lakebtc', 'latoken', 'lbank', 'liquid', 'livecoin', 'luno', 'lykke', 'mercado', 'mixcoins', 'oceanex',
              'okcoincny', 'okcoinusd', 'okex', 'okex3', 'paymium', 'rightbtc', 'southxchange', 'stex',
              'stronghold', 'surbitcoin', 'therock', 'tidebit', 'tidex', 'timex', 'upbit', 'vaultoro',
              'vbtc', 'whitebit']
 
-fee = 0.25
-
-clients = [getattr(ccxt, e.lower())() for e in exchanges]
-
 currency_pairs = ["ADA/BTC", "BCH/BTC", "BTG/BTC", "BTS/BTC", "CLAIM/BTC", "DASH/BTC", "DOGE/BTC", "EDO/BTC", "EOS/BTC",
                   "ETC/BTC","ETH/BTC", "FCT/BTC", "ICX/BTC", "IOTA/BTC", "LSK/BTC", "LTC/BTC", "MAID/BTC", "NEO/BTC",
                   "OMG/BTC", "QTUM/BTC", "STR/BTC", "TRX/BTC","VEN/BTC", "XEM/BTC", "XLM/BTC", "XMR/BTC", "XRP/BTC", "ZEC/BTC",
-                  "ADA/BTC", "BCH/USD", "BTG/USD", "BTS/USD", "CLAIM/USD", "DASH/USD", "DOGE/USD", "EDO/USD", "EOS/USD",
-                  "ETC/USD", "ETH/USD", "FCT/USD", "ICX/USD", "IOTA/USD", "LSK/USD", "LTC/USD", "MAID/USD", "NEO/USD",
-                  "OMG/USD", "QTUM/USD", "STR/USD", "TRX/USD", "VEN/USD", "XEM/USD", "XLM/USD", "XMR/USD", "XRP/USD",
-                  "ZEC/USD"]
+                  "ADA/BTC"]
+                  #"BCH/USD", "BTG/USD", "BTS/USD", "CLAIM/USD", "DASH/USD", "DOGE/USD", "EDO/USD", "EOS/USD",
+                  #"ETC/USD", "ETH/USD", "FCT/USD", "ICX/USD", "IOTA/USD", "LSK/USD", "LTC/USD", "MAID/USD", "NEO/USD",
+                  #"OMG/USD", "QTUM/USD", "STR/USD", "TRX/USD", "VEN/USD", "XEM/USD", "XLM/USD", "XMR/USD", "XRP/USD",
+                  #"ZEC/USD"]
+
+fee = 0.25
+
+clients = [getattr(ccxt, e.lower())() for e in exchanges]
 
 ask = np.zeros((len(currency_pairs), len(clients)))
 bid = np.zeros((len(currency_pairs), len(clients)))
@@ -66,3 +67,4 @@ for i, symbol in enumerate(currency_pairs):
 print("Number of profitable opportunities:", len(opportunities))
 for elem in opportunities:
     print(elem)
+
