@@ -10,9 +10,9 @@ import numpy as np
 
 # Non compatible exchanges: ['binanceje', 'braziliex', 'btcchina', 'bitfinex', 'bitfinex2', 'bittrex', 'chilebit', 'btcturk',
 # 'fcoinjp', 'coinmarketcap', 'gateio', 'huobipro', 'huobiru', 'indodax', 'btctradeua', 'zaif', 'zb', 'yobit', 'xbtce', '_1btcxe',
-# 'bibox', 'bitmex', 'bitstamp1', 'bitz', 'poloniex', 'theocean', 'btcalpha', 'fybse']
+# 'bibox', 'bitmex', 'bitstamp1', 'bitz', 'poloniex', 'theocean', 'btcalpha', 'fybse', 'allcoin']
 
-exchanges = ['acx', 'adara', 'allcoin', 'anxpro', 'bcex', 'bequant', 'bigone', 'binance',
+exchanges = ['acx', 'adara', 'anxpro', 'bcex', 'bequant', 'bigone', 'binance',
              'binanceus', 'bit2c', 'bitbank', 'bitbay', 'bitflyer', 'bitforex', 'bithumb', 'bitkk', 'bitlish',
              'bitmart', 'bitmax', 'bitso', 'bitstamp', 'bl3p', 'bleutrade',
               'btcbox', 'btcmarkets', 'btctradeim', 'buda', 'bw', 'bytetrade', 'cex',
