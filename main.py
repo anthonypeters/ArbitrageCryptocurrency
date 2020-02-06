@@ -54,17 +54,19 @@ for row, symbol in enumerate(currency_pairs):
 opportunities = []
 
 for i, symbol in enumerate(currency_pairs):
-    for j1, exchange1 in enumerate(exchanges):
-        for j2, exchange2 in enumerate(exchanges):
-
+    for p1, exchange1 in enumerate(exchanges):
+        for p2, exchange2 in enumerate(exchanges):
             roi = 0
-            if j1 != j2 and ask[i, j1] > 0:
-                roi = ((bid[i, j2] * (1 - fee / 100)) / (ask[i, j1] * (1 + fee / 100)) - 1) * 100
+            if p1 != p2 and (ask[i, p1] > 0):
+                roi = ((bid[i, p2] * (1 - fee / 100)) / (ask[i, p1] * (1 + fee / 100)) - 1) * 100
 
                 if roi > 0:
-                    opportunities.append([symbol, exchange1, ask[i, j1], exchange2, bid[i, j2], round(roi, 2)])
+                    opportunities.append([symbol, exchange1, ask[i, p1], exchange2, bid[i, p2], round(roi, 2)])
 
 print("Number of profitable opportunities:", len(opportunities))
+
+opportunities = sorted(opportunities, reverse = True, key=lambda ele: ele[5])
+
 for elem in opportunities:
     print(elem)
 
