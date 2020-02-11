@@ -35,7 +35,7 @@ currency_pairs = ["ADA/BTC", "BCH/BTC", "BTG/BTC", "BTS/BTC", "CLAIM/BTC", "DASH
                   #"ZEC/USD"]
 
 fee = 0.25
-
+print("test")
 clients = [getattr(ccxt, e.lower())() for e in exchanges]
 
 ask = np.zeros((len(currency_pairs), len(clients)))
