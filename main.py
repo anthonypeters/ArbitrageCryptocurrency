@@ -7,6 +7,7 @@
 
 import ccxt
 import numpy as np
+import timeit
 
 # Non compatible exchanges: ['binanceje', 'braziliex', 'btcchina', 'bitfinex', 'bitfinex2', 'bittrex', 'chilebit', 'btcturk',
 # 'fcoinjp', 'coinmarketcap', 'gateio', 'huobipro', 'huobiru', 'indodax', 'btctradeua', 'zaif', 'zb', 'yobit', 'xbtce', '_1btcxe',
@@ -35,12 +36,19 @@ currency_pairs = ["ADA/BTC", "BCH/BTC", "BTG/BTC", "BTS/BTC", "CLAIM/BTC", "DASH
                   #"ZEC/USD"]
 
 fee = 0.25
-print("test")
+start = timeit.default_timer()
+#getattr basically means ccxt.e.lower()
+#list of clients from ccxt supported exchanges
 clients = [getattr(ccxt, e.lower())() for e in exchanges]
-
+# ask and bid are arrays of zeros (2d array?)
 ask = np.zeros((len(currency_pairs), len(clients)))
 bid = np.zeros((len(currency_pairs), len(clients)))
-
+# time complex at least O(n^2)
+#enumerate loops over input with counter
+#row is the counter
+#symbole is the value from the currency_pairs
+#gets order book from client with a certain crypto
+#pass is null, just skips that try
 for row, symbol in enumerate(currency_pairs):
     for col, client in enumerate(clients):
 
@@ -51,8 +59,13 @@ for row, symbol in enumerate(currency_pairs):
         except:
             pass
 
+#list
 opportunities = []
 
+stop = timeit.default_timer()
+print('Time: ', stop - start)
+
+# time complex at least O(n^3)
 for i, symbol in enumerate(currency_pairs):
     for p1, exchange1 in enumerate(exchanges):
         for p2, exchange2 in enumerate(exchanges):
@@ -63,6 +76,9 @@ for i, symbol in enumerate(currency_pairs):
                 if roi > 0:
                     opportunities.append([symbol, exchange1, ask[i, p1], exchange2, bid[i, p2], round(roi, 2)])
 
+stop = timeit.default_timer()
+print('Time: ', stop - start)
+
 print("Number of profitable opportunities:", len(opportunities))
 
 opportunities = sorted(opportunities, reverse = True, key=lambda ele: ele[5])
@@ -70,3 +86,19 @@ opportunities = sorted(opportunities, reverse = True, key=lambda ele: ele[5])
 for elem in opportunities:
     print(elem)
 
+
+
+
+
+# for row, symbol in enumerate(currency_pairs):
+#     for col, client in enumerate(clients):
+#
+#         try:
+#             book = client.fetch_order_book(symbol)
+#             ask[row, col] = book['asks'][0][0]
+#             bid[row, col] = book['bids'][0][0]
+#         except:
+#             pass
+
+def recursiveEnumerate(cpairs,cli):
+    return 0
