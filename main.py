@@ -1,29 +1,31 @@
 # Arbitrage Cryptocurrency
-# Use of Bellman-Ford Algorithm or Dijkstra's Algorithm
-# Use of sorting algorithm
 # Use of CCXT Library
+# Use of sorting algorithm
+# Use of Bellman-Ford Algorithm or Dijkstra's Algorithm
+# Depth First Search + Breadth First Search
+
 
 # Anthony Peters, Franz Nastor, Peter Radev, Jack Hudanick, Tim Abbenhaus, Collin Jones
 
 import ccxt
 import numpy as np
+from math import log
 
 # Non compatible exchanges: ['binanceje', 'braziliex', 'btcchina', 'bitfinex', 'bitfinex2', 'bittrex', 'chilebit', 'btcturk',
 # 'fcoinjp', 'coinmarketcap', 'gateio', 'huobipro', 'huobiru', 'indodax', 'btctradeua', 'zaif', 'zb', 'yobit', 'xbtce', '_1btcxe',
-# 'bibox', 'bitmex', 'bitstamp1', 'bitz', 'poloniex', 'theocean', 'btcalpha', 'fybse', 'allcoin']
+# 'bibox', 'bitmex', 'bitstamp1', 'bitz', 'poloniex', 'theocean', 'btcalpha', 'fybse', 'allcoin', 'upbit']
 
 exchanges = ['acx', 'adara', 'anxpro', 'bcex', 'bequant', 'bigone', 'binance',
              'binanceus', 'bit2c', 'bitbank', 'bitbay', 'bitflyer', 'bitforex', 'bithumb', 'bitkk', 'bitlish',
-             'bitmart', 'bitmax', 'bitso', 'bitstamp', 'bl3p', 'bleutrade',
-              'btcbox', 'btcmarkets', 'btctradeim', 'buda', 'bw', 'bytetrade', 'cex',
-             'cobinhood', 'coinbase', 'coinbaseprime', 'coinbasepro', 'coincheck', 'coinegg', 'coinex',
-             'coinfalcon', 'coinfloor', 'coingi',  'coinmate', 'coinone', 'coinspot', 'coolcoin', 'coss',
-             'crex24', 'deribit', 'digifinex', 'dsx', 'exmo', 'exx', 'fcoin',  'flowbtc', 'foxbit', 'ftx',
-             'gemini', 'hitbtc', 'hitbtc2', 'ice3x', 'idex', 'independentreserve', 'itbit', 'kkex', 'kraken', 'kucoin',
-             'kuna', 'lakebtc', 'latoken', 'lbank', 'liquid', 'livecoin', 'luno', 'lykke', 'mercado', 'mixcoins', 'oceanex',
-             'okcoincny', 'okcoinusd', 'okex', 'okex3', 'paymium', 'rightbtc', 'southxchange', 'stex',
-             'stronghold', 'surbitcoin', 'therock', 'tidebit', 'tidex', 'timex', 'upbit', 'vaultoro',
-             'vbtc', 'whitebit']
+             'bitmart', 'bitmax', 'bitso', 'bitstamp', 'bl3p', 'bleutrade', 'btcbox', 'btcmarkets', 'btctradeim',
+             'buda', 'bw', 'bytetrade', 'cex', 'cobinhood', 'coinbase', 'coinbaseprime', 'coinbasepro',
+             'coincheck', 'coinegg', 'coinex', 'coinfalcon', 'coinfloor', 'coingi',  'coinmate', 'coinone',
+             'coinspot', 'coolcoin', 'coss', 'crex24', 'deribit', 'digifinex', 'dsx', 'exmo', 'exx', 'fcoin',
+             'flowbtc', 'foxbit', 'ftx', 'gemini', 'hitbtc', 'hitbtc2', 'ice3x', 'idex', 'independentreserve',
+             'itbit', 'kkex', 'kraken', 'kucoin', 'kuna', 'lakebtc', 'latoken', 'lbank', 'liquid', 'livecoin',
+             'luno', 'lykke', 'mercado', 'mixcoins', 'oceanex', 'okcoincny', 'okcoinusd', 'okex', 'okex3',
+             'paymium', 'rightbtc', 'southxchange', 'stex', 'stronghold', 'surbitcoin', 'therock', 'tidebit',
+             'tidex', 'timex', 'vaultoro', 'vbtc', 'whitebit']
 
 currency_pairs = ["ADA/BTC", "BCH/BTC", "BTG/BTC", "BTS/BTC", "CLAIM/BTC", "DASH/BTC", "DOGE/BTC", "EDO/BTC", "EOS/BTC",
                   "ETC/BTC","ETH/BTC", "FCT/BTC", "ICX/BTC", "IOTA/BTC", "LSK/BTC", "LTC/BTC", "MAID/BTC", "NEO/BTC",
@@ -69,4 +71,16 @@ opportunities = sorted(opportunities, reverse = True, key=lambda ele: ele[5])
 
 for elem in opportunities:
     print(elem)
+
+
+#Given an exchange calculate arbitrage opportunities
+# def arbitrage(exchange):
+#Fetch currency pairs on the exchange
+#     currencyPairs = exchange.fetchCurrencies()
+#import real time exchange rates for the different currency pairs
+#     currencyPairMatrix =
+#Create a graph with the edge weights as the -log of the exchange rate and nodes as the currencies
+#     graph = [[-log(edge) for edge in row] for row in graph]
+#.... Functionality
+
 
