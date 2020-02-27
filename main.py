@@ -56,6 +56,8 @@ for row, symbol in enumerate(currency_pairs):
             book = client.fetch_order_book(symbol)
             ask[row, col] = book['asks'][0][0]
             bid[row, col] = book['bids'][0][0]
+            stop = timeit.default_timer()
+            print('Time loop: ', stop - start)
         except:
             pass
 
