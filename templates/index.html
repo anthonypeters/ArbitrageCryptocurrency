@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<form action="/" method="post">
+		<input type="text" name="name">
+		<button type="submit">Submit</button>
+	</form>
+	{% for l in t %}
+		{{l}}
+	{% endfor %}
+
+	<div class="results">
+		<pre>{{response}}</pre>
+	</div>
+</body>
+</html>

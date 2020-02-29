@@ -12,3 +12,7 @@ data = {
 
 result2 = firebase.get("/crypto-arbitrage-6575e/Team", '')
 print(result2)
+
+
+
+
