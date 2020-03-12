@@ -1,0 +1,11 @@
+.body{
+    font-size: 1.5rem;
+    background-color: blue;
+}
+
+
+.exchanges{
+    display: flex;
+    grid-column: auto;
+    background-color: red;
+}

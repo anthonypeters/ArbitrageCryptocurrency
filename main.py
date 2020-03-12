@@ -9,6 +9,10 @@
 
 import ccxt
 import numpy as np
+
+from firebase import firebase
+
+firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/", "")
 from math import log
 
 # Non compatible exchanges: ['binanceje', 'braziliex', 'btcchina', 'bitfinex', 'bitfinex2', 'bittrex', 'chilebit', 'btcturk',
@@ -70,6 +74,7 @@ print("Number of profitable opportunities:", len(opportunities))
 opportunities = sorted(opportunities, reverse = True, key=lambda ele: ele[5])
 
 for elem in opportunities:
+    result = firebase.post('/crypto-arbitrage-6575e/Exchanges', elem)
     print(elem)
 
 

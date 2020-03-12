@@ -1,4 +1,5 @@
 from pyrebase import pyrebase
+from flask import *
 
 config = {
     "apiKey": "AIzaSyCdleI0nwtYWRkap5DlmIa0T3fbCFplKQI",
@@ -15,7 +16,6 @@ firebase2 = pyrebase.initialize_app(config)
 
 db = firebase2.database()
 
-from flask import *
 
 app = Flask(__name__)
 
@@ -25,10 +25,12 @@ def basic():
     if request.method == "POST":
         todo = request.form['name']
         db.child('testing').push(todo)
-        names = db.child("crypto-arbitrage-6575e").child("Team").get()
+        foods = db.child("testing").get()
+        food = foods.val()
+        names = db.child("crypto-arbitrage-6575e").child("Exchanges").get()
         name = names.val()
         response = json.dumps(name, sort_keys=True, indent=4, separators=(',', ': '))
-        return render_template('index.html', response=response)
+        return render_template('index.html', t=food.values(), response=response)
     return render_template('index.html')
 
 

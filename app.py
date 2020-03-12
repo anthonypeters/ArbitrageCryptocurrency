@@ -1,6 +1,6 @@
 from firebase import firebase
 
-firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/")
+firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/", "")
 
 data = {
     'Name': 'Peter Radev',
