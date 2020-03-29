@@ -86,6 +86,6 @@ for elem in opportunities:
 #     currencyPairMatrix =
 #Create a graph with the edge weights as the -log of the exchange rate and nodes as the currencies
 #     graph = [[-log(edge) for edge in row] for row in graph]
-#.... Functionality
+#.... Functionality#
 
 
