@@ -1,23 +1,17 @@
 # Arbitrage Cryptocurrency
 # Use of CCXT Library
 # Use of sorting algorithm
-# Use of Bellman-Ford Algorithm or Dijkstra's Algorithm
-# Depth First Search + Breadth First Search
+# Use of Bellman-Ford Algorithm
 
 
 # Anthony Peters, Franz Nastor, Peter Radev, Jack Hudanick, Tim Abbenhaus, Collin Jones
 
 import ccxt
 import numpy as np
-
 from firebase import firebase
 
 firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/", "")
-from math import log
 
-# Non compatible exchanges: ['binanceje', 'braziliex', 'btcchina', 'bitfinex', 'bitfinex2', 'bittrex', 'chilebit', 'btcturk',
-# 'fcoinjp', 'coinmarketcap', 'gateio', 'huobipro', 'huobiru', 'indodax', 'btctradeua', 'zaif', 'zb', 'yobit', 'xbtce', '_1btcxe',
-# 'bibox', 'bitmex', 'bitstamp1', 'bitz', 'poloniex', 'theocean', 'btcalpha', 'fybse', 'allcoin', 'upbit']
 
 exchanges = ['acx', 'adara', 'anxpro', 'bcex', 'bequant', 'bigone', 'binance',
              'binanceus', 'bit2c', 'bitbank', 'bitbay', 'bitflyer', 'bitforex', 'bithumb', 'bitkk', 'bitlish',
@@ -35,10 +29,6 @@ currency_pairs = ["ADA/BTC", "BCH/BTC", "BTG/BTC", "BTS/BTC", "CLAIM/BTC", "DASH
                   "ETC/BTC","ETH/BTC", "FCT/BTC", "ICX/BTC", "IOTA/BTC", "LSK/BTC", "LTC/BTC", "MAID/BTC", "NEO/BTC",
                   "OMG/BTC", "QTUM/BTC", "STR/BTC", "TRX/BTC","VEN/BTC", "XEM/BTC", "XLM/BTC", "XMR/BTC", "XRP/BTC", "ZEC/BTC",
                   "ADA/BTC"]
-                  #"BCH/USD", "BTG/USD", "BTS/USD", "CLAIM/USD", "DASH/USD", "DOGE/USD", "EDO/USD", "EOS/USD",
-                  #"ETC/USD", "ETH/USD", "FCT/USD", "ICX/USD", "IOTA/USD", "LSK/USD", "LTC/USD", "MAID/USD", "NEO/USD",
-                  #"OMG/USD", "QTUM/USD", "STR/USD", "TRX/USD", "VEN/USD", "XEM/USD", "XLM/USD", "XMR/USD", "XRP/USD",
-                  #"ZEC/USD"]
 
 fee = 0.25
 
@@ -49,7 +39,6 @@ bid = np.zeros((len(currency_pairs), len(clients)))
 
 for row, symbol in enumerate(currency_pairs):
     for col, client in enumerate(clients):
-
         try:
             book = client.fetch_order_book(symbol)
             ask[row, col] = book['asks'][0][0]
@@ -77,15 +66,5 @@ for elem in opportunities:
     result = firebase.post('/crypto-arbitrage-6575e/Exchanges', elem)
     print(elem)
 
-
-#Given an exchange calculate arbitrage opportunities
-# def arbitrage(exchange):
-#Fetch currency pairs on the exchange
-#     currencyPairs = exchange.fetchCurrencies()
-#import real time exchange rates for the different currency pairs
-#     currencyPairMatrix =
-#Create a graph with the edge weights as the -log of the exchange rate and nodes as the currencies
-#     graph = [[-log(edge) for edge in row] for row in graph]
-#.... Functionality#
 
 
