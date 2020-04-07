@@ -1,14 +1,47 @@
 # Arbitrage Cryptocurrency
 # Use of CCXT Library
-# Use of sorting algorithm
-# Use of Bellman-Ford Algorithm
-
+# Use of Bellman-Ford Algorithm to visualize arbitrage opportunities in Python/Flask
 
 # Anthony Peters, Franz Nastor, Peter Radev, Jack Hudanick, Tim Abbenhaus, Collin Jones
 
 import ccxt
+from Arbitrage import Arbitrage
+from Node import Node
+from Edge import Edge
 import numpy as np
 from firebase import firebase
+
+exchange = ccxt.bitmex()
+currency_pairs = []
+for n in exchange.load_markets():
+    currency_pairs.append(n)
+print(currency_pairs)
+
+for n in currency_pairs:
+    startVertex = 'BTC/USD'
+    node = new Node(n)
+    pass
+
+for each Node:
+    edge = Edge(n, n+1)
+    Node(n).adjacenciesList.append(Edge(n))
+
+arbitrage = Arbitrage()
+arbitrage.shortestPath()
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 
 firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/", "")
 
@@ -67,4 +100,4 @@ for elem in opportunities:
     print(elem)
 
 
-
+'''

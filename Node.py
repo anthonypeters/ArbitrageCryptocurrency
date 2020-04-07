@@ -10,4 +10,3 @@ class Node(object):
         self.predecessor = None
         self.minDistance = sys.maxsize
 
-        pass

@@ -7,4 +7,3 @@ class Edge(object):
         self.startVertex = startVertex
         self.startVertex = targetVertex
 
-        pass
