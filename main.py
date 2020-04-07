@@ -11,21 +11,26 @@ from Edge import Edge
 import numpy as np
 from firebase import firebase
 
+#Loads in an Exchange
+#Loads in currency_pairs and appends them to a list
 exchange = ccxt.bitmex()
 currency_pairs = []
 for n in exchange.load_markets():
     currency_pairs.append(n)
 print(currency_pairs)
 
+#Create a node for every currency pair with BTC/USD being the start vertex
 for n in currency_pairs:
     startVertex = 'BTC/USD'
     node = new Node(n)
     pass
 
+#Create an edge weight for each node connection
 for each Node:
     edge = Edge(n, n+1)
     Node(n).adjacenciesList.append(Edge(n))
 
+#Call arbitrage function shortest path
 arbitrage = Arbitrage()
 arbitrage.shortestPath()
 
