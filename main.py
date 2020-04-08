@@ -5,45 +5,54 @@
 # Anthony Peters, Franz Nastor, Peter Radev, Jack Hudanick, Tim Abbenhaus, Collin Jones
 
 import ccxt
-from Arbitrage import Arbitrage
 from Node import Node
 from Edge import Edge
 import numpy as np
+from Arbitrage import Arbitrage
 from firebase import firebase
 
-#Loads in an Exchange
-#Loads in currency_pairs and appends them to a list
-exchange = ccxt.bitmex()
-currency_pairs = []
-for n in exchange.load_markets():
-    currency_pairs.append(n)
+# Loads in our Exchange
+# Loads in currency_pairs and adds them to a list
+exchange = ccxt.binanceus()
+exchange.load_markets()
+currency_pairs = exchange.symbols
 print(currency_pairs)
 
-#Create a node for every currency pair with BTC/USD being the start vertex
+
+# Loads ask and bid price for the exchange and currency pairs
+ask = np.zeros((len(currency_pairs)))
+bid = np.zeros((len(currency_pairs)))
+
 for n in currency_pairs:
-    startVertex = 'BTC/USD'
-    node = new Node(n)
-    pass
+        try:
+            book = exchange.fetch_order_book(n)
+            ask[n] = book['asks'][0][0]
+            bid[n] = book['bids'][0][0]
+        except:
+            pass
 
-#Create an edge weight for each node connection
-for each Node:
-    edge = Edge(n, n+1)
-    Node(n).adjacenciesList.append(Edge(n))
-
-#Call arbitrage function shortest path
-arbitrage = Arbitrage()
-arbitrage.shortestPath()
-
-
-
-
+# Create a node for every currency pair with BTC/USD being the start vertex
+startVertex = 'BTC/USD'
+nodes = []
+for n in currency_pairs:
+    node = Node(n)
+    nodes.append(node)
+print(nodes)
 
 
+# Create an edge weight for each node connection
+#edges = []
+#for n in currency_pairs:
+    #u = ask
+    #v = n + 1
+    #weight = u / v
+    #edges.append(Edge(weight, u, v))
+#print(edges)
 
 
-
-
-
+# Call arbitrage function shortest path
+# arbitrage = Arbitrage()
+# arbitrage.shortestPath()
 
 
 '''
