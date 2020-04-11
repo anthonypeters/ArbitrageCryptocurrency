@@ -11,6 +11,7 @@ import numpy as np
 from Arbitrage import Arbitrage
 from firebase import firebase
 
+
 # Loads in our Exchange
 # Loads in currency_pairs and adds them to a list
 exchange = ccxt.binanceus()
@@ -18,18 +19,6 @@ exchange.load_markets()
 currency_pairs = exchange.symbols
 print(currency_pairs)
 
-
-# Loads ask and bid price for the exchange and currency pairs
-ask = np.zeros((len(currency_pairs)))
-bid = np.zeros((len(currency_pairs)))
-
-for n in currency_pairs:
-        try:
-            book = exchange.fetch_order_book(n)
-            ask[n] = book['asks'][0][0]
-            bid[n] = book['bids'][0][0]
-        except:
-            pass
 
 # Create a node for every currency pair with BTC/USD being the start vertex
 startVertex = 'BTC/USD'
@@ -40,14 +29,27 @@ for n in currency_pairs:
 print(nodes)
 
 
+# Loads ask and bid price for the exchange and currency pairs
+ask = np.zeros((len(currency_pairs)))
+bid = np.zeros((len(currency_pairs)))
+
+
 # Create an edge weight for each node connection
-#edges = []
-#for n in currency_pairs:
-    #u = ask
-    #v = n + 1
-    #weight = u / v
-    #edges.append(Edge(weight, u, v))
-#print(edges)
+edges = []
+for n in currency_pairs:
+    try:
+        book = exchange.fetch_order_book(n)
+        ask[n] = book['asks'][0][0]
+        bid[n] = book['bids'][0][0]
+        first = bid(n)
+        next = ask(n + 1)
+        weight = first / ask
+        if first == bid(n) and next == ask(n+1):
+            edges.append(Edge(weight, first, next))
+    except:
+        pass
+
+print(edges)
 
 
 # Call arbitrage function shortest path
