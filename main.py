@@ -17,7 +17,6 @@ from firebase import firebase
 exchange = ccxt.binanceus()
 exchange.load_markets()
 currency_pairs = exchange.symbols
-currency_pairs.remove('BTC/USD')
 print(currency_pairs)
 
 
@@ -25,19 +24,13 @@ print(currency_pairs)
 # Create a startVertex, startAmount, startValue = price of BTC
 startVertex = 'BTC/USD'
 startAmount = 1
-startBook = exchange.fetch_order_book(exchange.symbols[16])
-ask1 = np.zeros(1)
-ask1[0] = startBook['asks'][0][0]
-startValue = ask1[0]
 
 
 
 nodes = []
-
 for n in currency_pairs:
     node = Node(n)
     nodes.append(node)
-nodes.append('BTC/USD')
 print(nodes)
 
 
@@ -45,15 +38,12 @@ print(nodes)
 # Loads ask and bid price for the exchange and currency pairs
 ask = np.zeros((len(currency_pairs)))
 bid = np.zeros((len(currency_pairs)))
-book = exchange.fetch_order_book(exchange.symbols[0])
-book1 = exchange.fetch_order_book(exchange.symbols[1])
-
-
 
 # Create an edge weight for each node connection
 edges = []
 n = 0
 while n < len(currency_pairs)-1:
+        book = exchange.fetch_order_book(exchange.symbols[n])
         ask[n] = book['asks'][0][0]
         bid[n+1] = book['bids'][0][0]
         weight = ask[n] / bid[n+1]
@@ -61,7 +51,7 @@ while n < len(currency_pairs)-1:
         n+=1
 
 print(edges)
-print(startValue)
+#Arbitrage.shortestPath(, nodes, edges, startVertex)
 
 
 
