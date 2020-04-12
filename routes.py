@@ -16,7 +16,6 @@ firebase2 = pyrebase.initialize_app(config)
 
 db = firebase2.database()
 
-
 app = Flask(__name__)
 
 

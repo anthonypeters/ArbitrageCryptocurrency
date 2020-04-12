@@ -43,12 +43,12 @@ bid = np.zeros((len(currency_pairs)))
 edges = []
 n = 0
 while n < len(currency_pairs)-1:
-        book = exchange.fetch_order_book(exchange.symbols[n])
+        book = exchange.fetch_order_book(exchange.symbols[n], 5)
         ask[n] = book['asks'][0][0]
         bid[n+1] = book['bids'][0][0]
         weight = ask[n] / bid[n+1]
         edges.append(Edge(weight, currency_pairs[n], currency_pairs[n+1]))
-        n+=1
+        n += 1
 
 print(edges)
 #Arbitrage.shortestPath(, nodes, edges, startVertex)
