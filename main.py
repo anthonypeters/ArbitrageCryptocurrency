@@ -5,28 +5,85 @@
 # Anthony Peters, Franz Nastor, Peter Radev, Jack Hudanick, Tim Abbenhaus, Collin Jones
 
 import ccxt
-from Node import Node
-from Edge import Edge
 import numpy as np
+import math
+import networkx as nx
 from Arbitrage import Arbitrage
 from firebase import firebase
 
 
 # Loads in our Exchange
-# Loads in currency_pairs and adds them to a list
+# Loads in currency_pairs and adds them to a list with BTC/USD as last item
 exchange = ccxt.binanceus()
 exchange.load_markets()
 currency_pairs = exchange.symbols
+
+substring = 'USDT'
+substring2 = 'BUSD'
+for n in currency_pairs:
+    if substring2 in str(n):
+        currency_pairs.remove(n)
+
+for n in currency_pairs:
+    if substring in str(n):
+        currency_pairs.remove(n)
+
 print(currency_pairs)
 
+# Loads ask and bid price for the exchange and currency pairs
+ask = np.zeros((len(currency_pairs)))
+bid = np.zeros((len(currency_pairs)))
 
 
-# Create a startVertex, startAmount, startValue = price of BTC
-startVertex = 'BTC/USD'
-startAmount = 1
+edges = []
+n = 0
+j = 1
+
+while n < len(currency_pairs)-1:
+
+    book = exchange.fetch_order_book(currency_pairs[n], 5)
+    ask = book['asks'][0][0]
+
+    while j < len(currency_pairs)-1:
+        book = exchange.fetch_order_book(currency_pairs[j], 5)
+        bid = book['bids'][0][0]
+        weight = ask / bid
+        weight = (-(math.log(weight)))
+        edges.append([weight, currency_pairs[n], currency_pairs[j]])
+        j += 1
+
+    n += 1
+    j = 1
+
+for n in edges:
+    print(n)
 
 
 
+#Create a complete graph using networkx
+G = nx.MultiDiGraph()
+G.add_nodes_from(currency_pairs)
+G.add_edges_from(edges)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+# Creates nodes for every currency pair
 nodes = []
 for n in currency_pairs:
     node = Node(n)
@@ -34,31 +91,37 @@ for n in currency_pairs:
 print(nodes)
 
 
-
-# Loads ask and bid price for the exchange and currency pairs
-ask = np.zeros((len(currency_pairs)))
-bid = np.zeros((len(currency_pairs)))
-
 # Create an edge weight for each node connection
+
+
 edges = []
 n = 0
+
 while n < len(currency_pairs)-1:
+
         book = exchange.fetch_order_book(exchange.symbols[n], 5)
         ask[n] = book['asks'][0][0]
         bid[n+1] = book['bids'][0][0]
         weight = ask[n] / bid[n+1]
-        edges.append(Edge(weight, currency_pairs[n], currency_pairs[n+1]))
+        weight = (-(math.log(weight)))
+        if weight < 0:
+            edges.append(Edge(weight, currency_pairs[n], currency_pairs[n+1]))
         n += 1
 
 print(edges)
-#Arbitrage.shortestPath(, nodes, edges, startVertex)
+
+#Arbitrage.shortestPath(1, nodes, edges, nodes[16])
+'''
 
 
 
 
-# Call arbitrage function shortest path
-# arbitrage = Arbitrage()
-# arbitrage.shortestPath()
+
+
+
+
+
+
 
 
 '''

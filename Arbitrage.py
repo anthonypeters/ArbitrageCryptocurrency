@@ -8,7 +8,7 @@ class Arbitrage(object):
 
         startVertex.minDistance = 0
 
-        for i in range(0, len(vertexList-1)):
+        for i in range(0, len(vertexList)-1):
             for edge in edgeList:
 
                 u = edge.startVertex
