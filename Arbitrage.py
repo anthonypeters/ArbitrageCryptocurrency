@@ -24,4 +24,3 @@ class Arbitrage(object):
                 print("Negative cycle detected")
                 Arbitrage.HAS_CYCLE = True
             return
-        return

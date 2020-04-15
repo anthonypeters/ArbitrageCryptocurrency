@@ -18,15 +18,16 @@ exchange = ccxt.binanceus()
 exchange.load_markets()
 currency_pairs = exchange.symbols
 
+# Replace currency in the list function
 substring = 'USDT'
 substring2 = 'BUSD'
-for n in currency_pairs:
-    if substring2 in str(n):
-        currency_pairs.remove(n)
+def replace_currency(substring, list):
+    for n in list:
+        if substring in str(n):
+            list.remove(n)
 
-for n in currency_pairs:
-    if substring in str(n):
-        currency_pairs.remove(n)
+replace_currency(substring, currency_pairs)
+replace_currency(substring2, currency_pairs)
 
 print(currency_pairs)
 
