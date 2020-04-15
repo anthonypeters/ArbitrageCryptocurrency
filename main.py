@@ -23,6 +23,7 @@ currency_pairs = exchange.symbols
 # Replace currency in the list function
 substring = 'USDT'
 substring2 = 'BUSD'
+
 def replace_currency(substring, list):
     for n in list:
         if substring in str(n):
@@ -34,14 +35,20 @@ replace_currency(substring2, currency_pairs)
 
 
 # Loads ask and bid price for the exchange and currency pairs
+# Creates Graph and adds each currency pair to a node in the graph
 ask = np.zeros((len(currency_pairs)))
 bid = np.zeros((len(currency_pairs)))
 
+G = nx.MultiDiGraph()
+G.add_nodes_from(currency_pairs)
 
+
+
+# Creates and appends edges to the graph with a calculated weight
 edges = []
+weights = []
 n = 0
 j = 1
-
 while n < len(currency_pairs)-1:
 
     book = exchange.fetch_order_book(currency_pairs[n], 5)
@@ -52,7 +59,8 @@ while n < len(currency_pairs)-1:
         bid = book['bids'][0][0]
         weight = ask / bid
         weight = (-(math.log(weight)))
-        edges.append([weight, currency_pairs[n], currency_pairs[j]])
+        edge = [currency_pairs[n], currency_pairs[j]]
+        G.add_edge(edge[0], edge[1], weight)
         j += 1
 
     n += 1
@@ -60,69 +68,35 @@ while n < len(currency_pairs)-1:
 
 
 
-
-
-#Create a complete graph using networkx
-G = nx.MultiDiGraph()
-G.add_nodes_from(currency_pairs)
-G.add_edges_from(edges)
 print(G.nodes)
 print(G.edges)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print(len(G.nodes))
+print(len(G.edges))
 
 
 '''
-# Creates nodes for every currency pair
-nodes = []
-for n in currency_pairs:
-    node = Node(n)
-    nodes.append(node)
-print(nodes)
+def algorithm(Graph):
+    startVertex = G.nodes['BTC/USD']
+    vertexList = G.nodes
+    edgeList = G.edges
 
+    for i in range(0, len(vertexList) - 1):
+        for edge in edgeList:
 
-# Create an edge weight for each node connection
+            u = edge.startVertex
+            v = edge.targetvertex
+            newDistance = edge[0]
 
+            if newDistance < 0:
+                v.minDistance = newDistance
+                v.predecessor = u;
 
-edges = []
-n = 0
-
-while n < len(currency_pairs)-1:
-
-        book = exchange.fetch_order_book(exchange.symbols[n], 5)
-        ask[n] = book['asks'][0][0]
-        bid[n+1] = book['bids'][0][0]
-        weight = ask[n] / bid[n+1]
-        weight = (-(math.log(weight)))
-        if weight < 0:
-            edges.append(Edge(weight, currency_pairs[n], currency_pairs[n+1]))
-        n += 1
-
-print(edges)
-
-#Arbitrage.shortestPath(1, nodes, edges, nodes[16])
+    for edge in edgeList:
+        if self.hasCycle(edge):
+            print("Negative cycle detected")
+            Arbitrage.HAS_CYCLE = True
+        return
 '''
-
-
-
-
-
-
-
 
 
 
