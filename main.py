@@ -18,6 +18,8 @@ exchange = ccxt.binanceus()
 exchange.load_markets()
 currency_pairs = exchange.symbols
 
+
+
 # Replace currency in the list function
 substring = 'USDT'
 substring2 = 'BUSD'
@@ -29,7 +31,7 @@ def replace_currency(substring, list):
 replace_currency(substring, currency_pairs)
 replace_currency(substring2, currency_pairs)
 
-print(currency_pairs)
+
 
 # Loads ask and bid price for the exchange and currency pairs
 ask = np.zeros((len(currency_pairs)))
@@ -56,8 +58,7 @@ while n < len(currency_pairs)-1:
     n += 1
     j = 1
 
-for n in edges:
-    print(n)
+
 
 
 
@@ -65,6 +66,8 @@ for n in edges:
 G = nx.MultiDiGraph()
 G.add_nodes_from(currency_pairs)
 G.add_edges_from(edges)
+print(G.nodes)
+print(G.edges)
 
 
 
