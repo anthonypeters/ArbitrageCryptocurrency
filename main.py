@@ -73,29 +73,39 @@ while n < len(currency_pairs)-1:
 print(G.edges.data())
 print(G.number_of_edges())
 
-#nx.draw(G)
-#plt.show()
+nx.draw_circular(G, with_labels= True)
+plt.show()
 
 
 def algorithm(Graph):
     x = 0
     y = 0
+    z = 0
     nodes = list(Graph.nodes)
-    nextNode = nodes[y]
     totalWeight = 0
+    thirdNode = None
+    lastNode = None
 
     while x < len(Graph.nodes)-1:
         startNode = nodes[x]
+        nextNode = nodes[x + 1]
 
         while y < len(Graph.nodes)-1:
             dict = Graph.get_edge_data(startNode, nextNode, 0)
+
+
             if dict != 0:
-                print(dict['weight'])
-                totalWeight += dict['weight']
-                print(totalWeight)
-            startNode = nextNode
-            nextNode = nodes[y+1]
+
+                while z < 3:
+                    totalWeight += dict['weight']
+                    print(startNode, nextNode, totalWeight)
+                    z+=1
+                    startNode = nextNode
+                    nextNode = nodes[x + 2]
+            totalWeight = 0
+            z = 0
             y += 1
+
         x += 1
         y = 0
 
