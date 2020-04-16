@@ -9,6 +9,8 @@ import numpy as np
 import math
 import networkx as nx
 import matplotlib.pyplot as plt
+from itertools import permutations
+import random
 from firebase import firebase
 
 
@@ -76,7 +78,23 @@ print(G.number_of_edges())
 nx.draw_circular(G, with_labels= True)
 plt.show()
 
+firstNode = None
+lastNode = None
+nodes = list(G.nodes)
 
+for i in G.nodes:
+    firstNode = i
+    randomNode1 = random.choice(nodes)
+    randomNode2 = random.choice(nodes)
+    perm = permutations([firstNode, randomNode1, randomNode2, firstNode])
+
+    for i in list(perm):
+        a, b, c, d = i
+        if a == d and b != c:
+            print(i)
+
+
+'''
 def algorithm(Graph):
     x = 0
     y = 0
@@ -102,6 +120,7 @@ def algorithm(Graph):
                     z+=1
                     startNode = nextNode
                     nextNode = nodes[x + 2]
+
             totalWeight = 0
             z = 0
             y += 1
@@ -110,17 +129,8 @@ def algorithm(Graph):
         y = 0
 
 algorithm(G)
-
-
 '''
-for each node in the graph
-    call create cycles function that creates a cycle for every pair
 
-def create_cycles(G):
-    sets starting node
-    then for every other node in the list
-    create cycle = (node1, node2, node3, node1, total weight)
-'''
 
 
 
