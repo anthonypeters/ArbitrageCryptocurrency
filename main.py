@@ -8,6 +8,7 @@ import ccxt
 import numpy as np
 import math
 import networkx as nx
+import matplotlib.pyplot as plt
 from firebase import firebase
 
 
@@ -72,34 +73,43 @@ while n < len(currency_pairs)-1:
 print(G.edges.data())
 print(G.number_of_edges())
 
-'''
+#nx.draw(G)
+#plt.show()
+
+
 def algorithm(Graph):
     x = 0
     y = 0
-    nodes = Graph.nodes
+    nodes = list(Graph.nodes)
+    nextNode = nodes[y]
+    totalWeight = 0
     while x < len(Graph.nodes)-1:
-        startNode = nodes(Graph.nodes.index(x))
+        startNode = nodes[x]
         while y < len(Graph.nodes)-1:
-            nextNode = nodes(Graph.nodes.index(x))
-            weight = Graph.get_edge_data(startNode, nextNode)
+            dict = Graph.get_edge_data(startNode, nextNode, 0)
+            print(dict)
+            if dict != 0:
+                print(dict['weight'])
+                totalWeight += dict['weight']
+                print(totalWeight)
+            startNode = nextNode
+            nextNode = nodes[y+1]
             y += 1
         x += 1
-        y=0
-    print(weight)
-
+        y = 0
 
 algorithm(G)
+
+
 '''
-
-
 for each node in the graph
     call create cycles function that creates a cycle for every pair
 
 def create_cycles(G):
     sets starting node
     then for every other node in the list
-    create cycle = (node1, node2, node3, node1, total eight)
-
+    create cycle = (node1, node2, node3, node1, total weight)
+'''
 
 
 
