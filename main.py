@@ -83,11 +83,12 @@ def algorithm(Graph):
     nodes = list(Graph.nodes)
     nextNode = nodes[y]
     totalWeight = 0
+
     while x < len(Graph.nodes)-1:
         startNode = nodes[x]
+
         while y < len(Graph.nodes)-1:
             dict = Graph.get_edge_data(startNode, nextNode, 0)
-            print(dict)
             if dict != 0:
                 print(dict['weight'])
                 totalWeight += dict['weight']
