@@ -16,12 +16,14 @@ from firebase import firebase
 exchange = ccxt.binanceus()
 exchange.load_markets()
 currency_pairs = exchange.symbols
+currency_pairs.sort()
 
 
 
 # Replace currency in the list function
 substring = 'USDT'
 substring2 = 'BUSD'
+substring3 = '/BTC'
 
 
 def replace_currency(substring, list):
@@ -31,6 +33,7 @@ def replace_currency(substring, list):
 
 replace_currency(substring, currency_pairs)
 replace_currency(substring2, currency_pairs)
+replace_currency(substring3, currency_pairs)
 
 
 
@@ -39,13 +42,12 @@ replace_currency(substring2, currency_pairs)
 ask = np.zeros((len(currency_pairs)))
 bid = np.zeros((len(currency_pairs)))
 
-G = nx.MultiDiGraph()
+G = nx.DiGraph()
 G.add_nodes_from(currency_pairs)
-
-
+print(G.nodes)
+print(G.number_of_nodes())
 
 # Creates and appends edges to the graph with a calculated weight
-edges = {}
 n = 0
 j = 0
 while n < len(currency_pairs)-1:
@@ -58,51 +60,45 @@ while n < len(currency_pairs)-1:
         bid = book['bids'][0][0]
         weight = ask / bid
         weight = (-(math.log(weight)))
-        edge = [currency_pairs[n], currency_pairs[j]]
+        edge = [currency_pairs[n], currency_pairs[j], weight]
         if weight > 0:
-            G.add_edge(edge[0], edge[1], weight)
+            G.add_edge(edge[0], edge[1], weight = edge[2])
         j += 1
 
     n += 1
     j = 0
 
 
-print(G.nodes)
-print(G.edges)
-print(len(G.nodes))
-print(len(G.edges))
+print(G.edges.data())
+print(G.number_of_edges())
 
-
+'''
 def algorithm(Graph):
-
-    for edge in Graph.edges:
-        u1, v1, w1 = edge
-        distance = w1
-        totalDistance = distance
-
-        for edge in Graph.edges:
-            u2, v2, w2 = edge
-
-            if (u2 == v1) and (v2 != u1):
-                distance = w2
-                totalDistance += distance
-
-                for edge in Graph.edges:
-                    u3, v3, w3 = edge
-
-                    if (u3 == v2) and (v3 == u1):
-                        distance = w3
-                        totalDistance += distance
-
-                        return totalDistance
-    print(totalDistance)
+    x = 0
+    y = 0
+    nodes = Graph.nodes
+    while x < len(Graph.nodes)-1:
+        startNode = nodes(Graph.nodes.index(x))
+        while y < len(Graph.nodes)-1:
+            nextNode = nodes(Graph.nodes.index(x))
+            weight = Graph.get_edge_data(startNode, nextNode)
+            y += 1
+        x += 1
+        y=0
+    print(weight)
 
 
 algorithm(G)
+'''
 
 
+for each node in the graph
+    call create cycles function that creates a cycle for every pair
 
-
+def create_cycles(G):
+    sets starting node
+    then for every other node in the list
+    create cycle = (node1, node2, node3, node1, total eight)
 
 
 
