@@ -8,7 +8,6 @@ import ccxt
 import numpy as np
 import math
 import networkx as nx
-from Arbitrage import Arbitrage
 from firebase import firebase
 
 
