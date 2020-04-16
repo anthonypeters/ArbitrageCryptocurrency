@@ -24,6 +24,7 @@ currency_pairs = exchange.symbols
 substring = 'USDT'
 substring2 = 'BUSD'
 
+
 def replace_currency(substring, list):
     for n in list:
         if substring in str(n):
@@ -45,10 +46,9 @@ G.add_nodes_from(currency_pairs)
 
 
 # Creates and appends edges to the graph with a calculated weight
-edges = []
-weights = []
+edges = {}
 n = 0
-j = 1
+j = 0
 while n < len(currency_pairs)-1:
 
     book = exchange.fetch_order_book(currency_pairs[n], 5)
@@ -60,12 +60,12 @@ while n < len(currency_pairs)-1:
         weight = ask / bid
         weight = (-(math.log(weight)))
         edge = [currency_pairs[n], currency_pairs[j]]
-        G.add_edge(edge[0], edge[1], weight)
+        if weight > 0:
+            G.add_edge(edge[0], edge[1], weight)
         j += 1
 
     n += 1
-    j = 1
-
+    j = 0
 
 
 print(G.nodes)
@@ -74,29 +74,37 @@ print(len(G.nodes))
 print(len(G.edges))
 
 
-'''
 def algorithm(Graph):
-    startVertex = G.nodes['BTC/USD']
-    vertexList = G.nodes
-    edgeList = G.edges
 
-    for i in range(0, len(vertexList) - 1):
-        for edge in edgeList:
+    for edge in Graph.edges:
+        u1, v1, w1 = edge
+        distance = w1
+        totalDistance = distance
 
-            u = edge.startVertex
-            v = edge.targetvertex
-            newDistance = edge[0]
+        for edge in Graph.edges:
+            u2, v2, w2 = edge
 
-            if newDistance < 0:
-                v.minDistance = newDistance
-                v.predecessor = u;
+            if (u2 == v1) and (v2 != u1):
+                distance = w2
+                totalDistance += distance
 
-    for edge in edgeList:
-        if self.hasCycle(edge):
-            print("Negative cycle detected")
-            Arbitrage.HAS_CYCLE = True
-        return
-'''
+                for edge in Graph.edges:
+                    u3, v3, w3 = edge
+
+                    if (u3 == v2) and (v3 == u1):
+                        distance = w3
+                        totalDistance += distance
+
+                        return totalDistance
+    print(totalDistance)
+
+
+algorithm(G)
+
+
+
+
+
 
 
 
