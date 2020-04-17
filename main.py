@@ -6,52 +6,97 @@
 
 import ccxt
 import numpy as np
-import math
 import networkx as nx
 import matplotlib.pyplot as plt
 from itertools import permutations
 from firebase import firebase
 
 
+def replace_currency(substring, list):
+    for n in list:
+        list.sort()
+        if substring in str(n):
+            list.remove(n)
+
+
+def cycles_algorithm(Graph):
+    firstNode = None
+    lastNode = None
+    nodes = list(Graph.nodes)
+    perm = permutations(nodes, 2)
+    permutationsList = list(perm)
+    cycles = []
+
+    for i in permutationsList:
+        a,b = i
+        if (a != b):
+            cycles.append((a, b))
+
+    print(cycles)
+    print(len(cycles))
+    return cycles
+
+
+def algorithm(Graph, cycles):
+    x = 0
+    firstNode = None
+    secondNode = None
+    thirdNode = None
+    lastNode = None
+    nodes = list(Graph.nodes)
+    valueList = []
+
+    while x < len(nodes)-1:
+        for cycle in cycles:
+            a, b = cycle
+            firstNode = nodes[x]
+            secondNode = a
+            thirdNode = b
+            lastNode = nodes[x]
+
+            if firstNode != a and lastNode != b:
+                dict = Graph.get_edge_data(firstNode, secondNode, 0)
+                dict2 = Graph.get_edge_data(secondNode, thirdNode, 0)
+                dict3 = Graph.get_edge_data(thirdNode, lastNode, 0)
+
+                if dict != 0 and dict2 != 0 and dict3 != 0:
+                    value = float(1.0 * dict['weight'] * dict2['weight'] * dict3['weight'])
+                    if value > 1.01:
+                        valueList.append(value)
+
+        x+=1
+    print(len(valueList))
+    valueList.sort(reverse=True)
+    print(valueList)
+    return valueList
+
+
 # Loads in our Exchange
 # Loads in currency_pairs and adds them to a list with BTC/USD as last item
+# Creates Graph
 exchange = ccxt.binanceus()
 exchange.load_markets()
 currency_pairs = exchange.symbols
 currency_pairs.sort()
+G = nx.DiGraph()
 
-
+# Loads ask and bid price holder for the exchange and currency pairs
+ask = np.zeros(5)
+bid = np.zeros(5)
 
 # Replace currency in the list function
 substring = 'USDT'
 substring2 = 'BUSD'
 substring3 = '/BTC'
 
-
-def replace_currency(substring, list):
-    for n in list:
-        if substring in str(n):
-            list.remove(n)
-
 replace_currency(substring, currency_pairs)
 replace_currency(substring2, currency_pairs)
 replace_currency(substring3, currency_pairs)
 
-
-
-# Loads ask and bid price for the exchange and currency pairs
-# Creates Graph and adds each currency pair to a node in the graph
-ask = np.zeros((len(currency_pairs)))
-bid = np.zeros((len(currency_pairs)))
-
-G = nx.DiGraph()
-G.add_nodes_from(currency_pairs)
-print(G.nodes)
-print(G.number_of_nodes())
-
 # Creates and appends edges to the graph with a calculated weight
 n = 0
 j = 0
+
 while n < len(currency_pairs)-1:
 
     book = exchange.fetch_order_book(currency_pairs[n], 5)
@@ -61,69 +106,27 @@ while n < len(currency_pairs)-1:
         book = exchange.fetch_order_book(currency_pairs[j], 5)
         bid = book['bids'][0][0]
         weight = ask / bid
-        weight = (-(math.log(weight)))
         edge = [currency_pairs[n], currency_pairs[j], weight]
-        if weight > 0:
-            G.add_edge(edge[0], edge[1], weight = edge[2])
+        if edge[0] != edge[1]:
+            G.add_edge(edge[0], edge[1], weight=edge[2])
         j += 1
 
     n += 1
     j = 0
 
 
+G.add_nodes_from(currency_pairs)
+print(G.nodes)
+print(G.number_of_nodes())
 print(G.edges.data())
 print(G.number_of_edges())
 
-#nx.draw_circular(G, with_labels= True)
+#nx.draw_circular(G)
 #plt.show()
 
-firstNode = None
-lastNode = None
-nodes = list(G.nodes)
-perm = permutations(nodes, 2)
-permutationsList = list(perm)
-cycles = []
-
-for i in permutationsList:
-    a,b = i
-    for node in nodes:
-        firstNode = nodes[nodes.index(node)]
-        lastNode = nodes[nodes.index(node)]
-        if (firstNode != a) and (a != b) and (b != lastNode):
-            cycles.append((firstNode, a, b, lastNode))
-
-print(cycles)
-print(len(cycles))
-
-
-def algorithm(Graph, cycles):
-    x = 0
-    firstNode = None
-    secondNode = None
-    thirdNode = None
-    lastNode = None
-    valueList = []
-    while x < len(cycles)-1:
-        for cycle in cycles:
-            a, b, c, d = cycle
-            firstNode = a
-            secondNode = b
-            thirdNode = c
-            lastNode = d
-            dict = Graph.get_edge_data(firstNode, secondNode, 0)
-            dict2 = Graph.get_edge_data(secondNode, thirdNode, 0)
-            dict3 = Graph.get_edge_data(thirdNode, lastNode, 0)
-            if dict != 0 and dict2 != 0 and dict3 != 0:
-                value = float(1.0 * dict['weight'] / dict2['weight'] * dict3['weight'])
-                valueList.append(value)
-        x+=1
-
-    for n in valueList:
-        print(n)
-    print(len(valueList))
-
-
+cycles = cycles_algorithm(G)
 algorithm(G, cycles)
+#firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/", "")
 
 
 
