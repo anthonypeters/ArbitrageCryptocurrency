@@ -10,7 +10,6 @@ import math
 import networkx as nx
 import matplotlib.pyplot as plt
 from itertools import permutations
-import random
 from firebase import firebase
 
 
@@ -84,6 +83,7 @@ nodes = list(G.nodes)
 perm = permutations(nodes, 2)
 permutationsList = list(perm)
 cycles = []
+
 for i in permutationsList:
     a,b = i
     for node in nodes:
@@ -95,42 +95,36 @@ for i in permutationsList:
 print(cycles)
 print(len(cycles))
 
-'''
-def algorithm(Graph):
+
+def algorithm(Graph, cycles):
     x = 0
-    y = 0
-    z = 0
-    nodes = list(Graph.nodes)
-    totalWeight = 0
+    firstNode = None
+    secondNode = None
     thirdNode = None
     lastNode = None
+    valueList = []
+    while x < len(cycles)-1:
+        for cycle in cycles:
+            a, b, c, d = cycle
+            firstNode = a
+            secondNode = b
+            thirdNode = c
+            lastNode = d
+            dict = Graph.get_edge_data(firstNode, secondNode, 0)
+            dict2 = Graph.get_edge_data(secondNode, thirdNode, 0)
+            dict3 = Graph.get_edge_data(thirdNode, lastNode, 0)
+            if dict != 0 and dict2 != 0 and dict3 != 0:
+                value = float(1.0 * dict['weight'] / dict2['weight'] * dict3['weight'])
+                valueList.append(value)
+        x+=1
 
-    while x < len(Graph.nodes)-1:
-        startNode = nodes[x]
-        nextNode = nodes[x + 1]
+    for n in valueList:
+        print(n)
+    print(len(valueList))
 
-        while y < len(Graph.nodes)-1:
-            dict = Graph.get_edge_data(startNode, nextNode, 0)
-    
 
-            if dict != 0:
+algorithm(G, cycles)
 
-                while z < 3:
-                    totalWeight += dict['weight']
-                    print(startNode, nextNode, totalWeight)
-                    z+=1
-                    startNode = nextNode
-                    nextNode = nodes[x + 2]
-
-            totalWeight = 0
-            z = 0
-            y += 1
-
-        x += 1
-        y = 0
-
-algorithm(G)
-'''
 
 
 
