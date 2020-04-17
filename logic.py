@@ -1,24 +1,21 @@
 from itertools import permutations
 
 
-
-
-
-def replace_currency(substring, list):
-    for n in list:
-        list.sort()
+def replace_currency(substring, currency_list):
+    for n in currency_list:
         if substring in str(n):
-            list.remove(n)
+            currency_list.remove(n)
 
-def cycles_algorithm(Graph):
-    nodes = list(Graph.nodes)
+
+def cycles_algorithm(graph):
+    nodes = list(graph.nodes)
     perm = permutations(nodes, 2)
-    permutationsList = list(perm)
+    permutations_list = list(perm)
     cycles = []
 
-    for i in permutationsList:
-        a,b = i
-        if (a != b):
+    for i in permutations_list:
+        a, b = i
+        if a != b:
             cycles.append((a, b))
 
     print(cycles)
@@ -26,32 +23,28 @@ def cycles_algorithm(Graph):
     return cycles
 
 
-def algorithm(Graph, cycles):
+def algorithm(graph, cycles):
     x = 0
-    firstNode = None
-    secondNode = None
-    thirdNode = None
-    lastNode = None
-    nodes = list(Graph.nodes)
+    nodes = list(graph.nodes)
     valueList = []
 
     while x < len(nodes)-1:
         for cycle in cycles:
             a, b = cycle
-            firstNode = nodes[x]
-            secondNode = a
-            thirdNode = b
-            lastNode = nodes[x]
+            first_node = nodes[x]
+            second_node = a
+            third_node = b
+            last_node = nodes[x]
 
-            if firstNode != a and lastNode != b:
-                dict = Graph.get_edge_data(firstNode, secondNode, 0)
-                dict2 = Graph.get_edge_data(secondNode, thirdNode, 0)
-                dict3 = Graph.get_edge_data(thirdNode, lastNode, 0)
+            if first_node != a and last_node != b:
+                weight_dict = graph.get_edge_data(first_node, second_node, 0)
+                weight_dict2 = graph.get_edge_data(second_node, third_node, 0)
+                weight_dict3 = graph.get_edge_data(third_node, last_node, 0)
 
-                if dict != 0 and dict2 != 0 and dict3 != 0:
-                    value = float(1.0 * dict['weight'] * dict2['weight'] * dict3['weight'])
+                if weight_dict != 0 and weight_dict2 != 0 and weight_dict3 != 0:
+                    value = float(1.0 * weight_dict['weight'] * weight_dict2['weight'] * weight_dict3['weight'])
                     if value > 1.019:
-                        valueList.append((value, firstNode, secondNode, thirdNode, lastNode))
+                        valueList.append((value, first_node, second_node, third_node, last_node))
 
         x += 1
     print(len(valueList))
