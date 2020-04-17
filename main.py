@@ -20,8 +20,6 @@ def replace_currency(substring, list):
 
 
 def cycles_algorithm(Graph):
-    firstNode = None
-    lastNode = None
     nodes = list(Graph.nodes)
     perm = permutations(nodes, 2)
     permutationsList = list(perm)
@@ -61,10 +59,11 @@ def algorithm(Graph, cycles):
 
                 if dict != 0 and dict2 != 0 and dict3 != 0:
                     value = float(1.0 * dict['weight'] * dict2['weight'] * dict3['weight'])
-                    if value > 1.01:
-                        valueList.append(value)
+                    if value > 1.019:
+                        valueList.append((value, firstNode, secondNode, thirdNode, lastNode))
 
-        x+=1
+        x += 1
+
     print(len(valueList))
     valueList.sort(reverse=True)
     print(valueList)
@@ -126,8 +125,8 @@ print(G.number_of_edges())
 
 cycles = cycles_algorithm(G)
 algorithm(G, cycles)
-#firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/", "")
-
+# firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/", "")
+# result = firebase.post('/crypto-arbitrage-6575e/Exchanges', elem)
 
 
 
