@@ -75,24 +75,25 @@ while n < len(currency_pairs)-1:
 print(G.edges.data())
 print(G.number_of_edges())
 
-nx.draw_circular(G, with_labels= True)
-plt.show()
+#nx.draw_circular(G, with_labels= True)
+#plt.show()
 
 firstNode = None
 lastNode = None
 nodes = list(G.nodes)
+perm = permutations(nodes, 2)
+permutationsList = list(perm)
+cycles = []
+for i in permutationsList:
+    a,b = i
+    for node in nodes:
+        firstNode = nodes[nodes.index(node)]
+        lastNode = nodes[nodes.index(node)]
+        if (firstNode != a) and (a != b) and (b != lastNode):
+            cycles.append((firstNode, a, b, lastNode))
 
-for i in G.nodes:
-    firstNode = i
-    randomNode1 = random.choice(nodes)
-    randomNode2 = random.choice(nodes)
-    perm = permutations([firstNode, randomNode1, randomNode2, firstNode])
-
-    for i in list(perm):
-        a, b, c, d = i
-        if a == d and b != c:
-            print(i)
-
+print(cycles)
+print(len(cycles))
 
 '''
 def algorithm(Graph):
@@ -110,7 +111,7 @@ def algorithm(Graph):
 
         while y < len(Graph.nodes)-1:
             dict = Graph.get_edge_data(startNode, nextNode, 0)
-
+    
 
             if dict != 0:
 
