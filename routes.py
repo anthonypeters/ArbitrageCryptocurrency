@@ -23,13 +23,10 @@ app = Flask(__name__)
 def basic():
     if request.method == "POST":
         todo = request.form['name']
-        db.child('testing').push(todo)
-        foods = db.child("testing").get()
-        food = foods.val()
-        names = db.child("crypto-arbitrage-6575e").child("Exchanges").get()
+        names = db.child("crypto-arbitrage-6575e").child("Opportunities").get()
         name = names.val()
         response = json.dumps(name, sort_keys=True, indent=4, separators=(',', ': '))
-        return render_template('index.html', t=food.values(), response=response)
+        return render_template('index.html', response=response)
     return render_template('index.html')
 
 

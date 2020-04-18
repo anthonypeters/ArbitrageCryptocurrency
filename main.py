@@ -38,12 +38,12 @@ logic.replace_currency(substring3, currency_pairs)
 n = 0
 j = 0
 
-while n < len(currency_pairs)-1:
+while n < len(currency_pairs):
 
     book = exchange.fetch_order_book(currency_pairs[n], 5)
     ask = book['asks'][0][0]
 
-    while j < len(currency_pairs)-1:
+    while j < len(currency_pairs):
         book = exchange.fetch_order_book(currency_pairs[j], 5)
         bid = book['bids'][0][0]
         weight = ask / bid
@@ -62,10 +62,14 @@ print(G.number_of_nodes())
 print(G.edges.data())
 print(G.number_of_edges())
 
-#nx.draw_circular(G)
-#plt.show()
+nx.draw_circular(G)
+plt.show()
+
+firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/", "")
+#for node in G.nodes:
+    #firebase.post('/crypto-arbitrage-6575e/Nodes', node)
 
 cycles = logic.cycles_algorithm(G)
 logic.algorithm(G, cycles)
-# firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/", "")
-# result = firebase.post('/crypto-arbitrage-6575e/Exchanges', elem)
+
+

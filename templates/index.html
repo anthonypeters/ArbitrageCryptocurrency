@@ -5,37 +5,50 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+
+	<label for="currencies">Choose a starting Node:</label>
+
+	<select id="currencies">
+	  <option value="ADA/USD">ADA/USD</option>
+	  <option value="ALGO/USD">ALGO/USD</option>
+	  <option value="ATOM/USD">ATOM/USD</option>
+	  <option value="BAT/USD">BAT/USD</option>
+	  <option value="BCH/USD">BCH/USD</option>
+	  <option value="BNB/USD">BNB/USD</option>
+	  <option value="BTC/USD">BTC/USD</option>
+	  <option value="DASH/USD">DASH/USD</option>
+	  <option value="ENJ/USD">ENJ/USD</option>
+	  <option value="ETC/USD">ETC/USD</option>
+	  <option value="ETH/USD">ETH/USD</option>
+	  <option value="ICX/USD">ICX/USD</option>
+	  <option value="IOTA/USD">IOTA/USD</option>
+	  <option value="LINK/USD">LINK/USD</option>
+	  <option value="LTC/USD">LTC/USD</option>
+	  <option value="NANO/USD">NANO/USD</option>
+	  <option value="NEO/USD">NEO/USD</option>
+	  <option value="ONT/USD">ONT/USD</option>
+	  <option value="QTUM/USD">QTUM/USD</option>
+	  <option value="RVN/USD">RVN/USD</option>
+	  <option value="VET/USD">VET/USD</option>
+	  <option value="WAVES/USD">WAVES/USD</option>
+	  <option value="XLM/USD">XLM/USD</option>
+	  <option value="XRP/USD">XRP/USD</option>
+	  <option value="XTZ/USD">XTZ/USD</option>
+	  <option value="ZEC/USD">ZEC/USD</option>
+	  <option value="ZIL/USD">ZIL/USD</option>
+	  <option value="ZRX/USD">ZRX/USD</option>
+	</select>
+
+
 	<form action="/" method="post">
 		<input type="text" name="name">
 		<button type="submit">Submit</button>
 	</form>
-	<form action="/exchanges" method="post" class="exchanges">
-		<input type="checkbox">acx
-		<input type="checkbox">adara
-		<input type="checkbox">anxpro
-		<input type="checkbox">bcex
-		<input type="checkbox">bequant
-		<input type="checkbox">bigone
-		<input type="checkbox">binance
-		<input type="checkbox">binanceus
-		<input type="checkbox">bit2c
-		<input type="checkbox">bitbank
-		<input type="checkbox">bitbay
-		<input type="checkbox">bitflyer
-		<input type="checkbox">bitforex
-		<input type="checkbox">bithumb
-		<input type="checkbox">bitkk
-		<input type="checkbox">bitlish
-		<input type="checkbox">bitmart
-		<input type="checkbox">bitmax
-		<input type="checkbox">bitstamp
-		<input type="checkbox">bl3p
-		<input type="checkbox">bleutrade
-		<button type="submit">Submit</button>
-	</form>
-	{% for l in t %}
-		{{l}}
-	{% endfor %}
+
+
+<!--	{% for l in t %}-->
+<!--		{{l}}-->
+<!--	{% endfor %}-->
 
 	<div class="results">
 		<pre>{{response}}</pre>

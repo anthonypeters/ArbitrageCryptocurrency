@@ -1,5 +1,7 @@
 from itertools import permutations
+from firebase import firebase
 
+firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/", "")
 
 def replace_currency(substring, currency_list):
     for n in currency_list:
@@ -44,7 +46,9 @@ def algorithm(graph, cycles):
                 if weight_dict != 0 and weight_dict2 != 0 and weight_dict3 != 0:
                     value = float(1.0 * weight_dict['weight'] * weight_dict2['weight'] * weight_dict3['weight'])
                     if value > 1.019:
-                        valueList.append((value, first_node, second_node, third_node, last_node))
+                        tuple = (value, first_node, second_node, third_node, last_node)
+                        valueList.append(tuple)
+                        #firebase.post('/crypto-arbitrage-6575e/Opportunities', tuple)
 
         x += 1
     print(len(valueList))
