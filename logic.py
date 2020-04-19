@@ -25,7 +25,7 @@ def cycles_algorithm(graph):
     return cycles
 
 
-def algorithm(graph, cycles):
+def n_hayward(graph, cycles):
     x = 0
     nodes = list(graph.nodes)
     valueList = []
@@ -48,10 +48,11 @@ def algorithm(graph, cycles):
                     if value > 1.019:
                         tuple = (value, first_node, second_node, third_node, last_node)
                         valueList.append(tuple)
-                        #firebase.post('/crypto-arbitrage-6575e/Opportunities', tuple)
+
 
         x += 1
     print(len(valueList))
     valueList.sort(reverse=True)
     print(valueList)
+    firebase.post('/crypto-arbitrage-6575e/Opportunities', valueList)
     return valueList

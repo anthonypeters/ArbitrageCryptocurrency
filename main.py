@@ -1,6 +1,6 @@
 # Arbitrage Cryptocurrency
 # Use of CCXT Library
-# Use of Bellman-Ford Algorithm to visualize arbitrage opportunities in Python/Flask
+# Use of N-Hayward Algorithm to visualize arbitrage opportunities in Python/Flask
 
 # Anthony Peters, Franz Nastor, Peter Radev, Jack Hudanick, Tim Abbenhaus, Collin Jones
 
@@ -8,8 +8,8 @@ import ccxt
 import numpy as np
 import networkx as nx
 import logic
-import matplotlib.pyplot as plt
 from firebase import firebase
+import matplotlib.pyplot as plt
 
 
 # Loads in our Exchange
@@ -66,10 +66,10 @@ print(G.number_of_edges())
 #plt.show()
 
 firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/", "")
-#for node in G.nodes:
-    #firebase.post('/crypto-arbitrage-6575e/Nodes', node)
+firebase.delete('crypto-arbitrage-6575e', "Opportunities")
+
 
 cycles = logic.cycles_algorithm(G)
-logic.algorithm(G, cycles)
+logic.n_hayward(G, cycles)
 
 
