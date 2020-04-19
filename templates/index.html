@@ -1,57 +1,142 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+body {
+	font-family: "Times New Roman", Georgia, Serif;
+	background-color: #333333;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+	color: crimson;
+}
+</style>
 <body>
 
-	<label for="currencies">Choose a starting Node:</label>
-
-	<select id="currencies">
-	  <option value="ADA/USD">ADA/USD</option>
-	  <option value="ALGO/USD">ALGO/USD</option>
-	  <option value="ATOM/USD">ATOM/USD</option>
-	  <option value="BAT/USD">BAT/USD</option>
-	  <option value="BCH/USD">BCH/USD</option>
-	  <option value="BNB/USD">BNB/USD</option>
-	  <option value="BTC/USD">BTC/USD</option>
-	  <option value="DASH/USD">DASH/USD</option>
-	  <option value="ENJ/USD">ENJ/USD</option>
-	  <option value="ETC/USD">ETC/USD</option>
-	  <option value="ETH/USD">ETH/USD</option>
-	  <option value="ICX/USD">ICX/USD</option>
-	  <option value="IOTA/USD">IOTA/USD</option>
-	  <option value="LINK/USD">LINK/USD</option>
-	  <option value="LTC/USD">LTC/USD</option>
-	  <option value="NANO/USD">NANO/USD</option>
-	  <option value="NEO/USD">NEO/USD</option>
-	  <option value="ONT/USD">ONT/USD</option>
-	  <option value="QTUM/USD">QTUM/USD</option>
-	  <option value="RVN/USD">RVN/USD</option>
-	  <option value="VET/USD">VET/USD</option>
-	  <option value="WAVES/USD">WAVES/USD</option>
-	  <option value="XLM/USD">XLM/USD</option>
-	  <option value="XRP/USD">XRP/USD</option>
-	  <option value="XTZ/USD">XTZ/USD</option>
-	  <option value="ZEC/USD">ZEC/USD</option>
-	  <option value="ZIL/USD">ZIL/USD</option>
-	  <option value="ZRX/USD">ZRX/USD</option>
-	</select>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-coral w3-padding w3-card" style="letter-spacing:4px;">
+    <a href="#home" class="w3-bar-item w3-button" style = "color:crimson">Alpha Seekers</a>
+    <!-- Right-sided navbar links. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="#about" class="w3-bar-item w3-button" style = "color:crimson">About</a>
+      <a href="#contact" class="w3-bar-item w3-button" style = "color:crimson">Contact</a>
+    </div>
+  </div>
+</div>
 
 
-	<form action="/" method="post">
-		<input type="text" name="name">
-		<button type="submit">Submit</button>
-	</form>
+<!-- Page content -->
+<div class="w3-content" style="max-width:1100px">
+
+  <!-- About Section -->
+  <div class="w3-row w3-padding-64" id="about">
+    <div class="w3-col m6 w3-padding-large w3-hide-small">
+     <img src="https://i.ibb.co/QfbZVvJ/Graph.png" class="w3-round w3-image w3-opacity-min" alt="Connected Graph" width="600" height="750">
+    </div>
+
+    <div class="w3-col m6 w3-padding-large">
+      <h1 class="w3-center">About Alpha Seekers</h1><br>
+      <h5 class="w3-center">Tradition since 2020</h5>
+      <label for="currencies" style= "color:crimson" >Choose a starting Node:</label>
+		<select id="currencies">
+		  <option value="ADA/USD">ADA/USD</option>
+		  <option value="ALGO/USD">ALGO/USD</option>
+		  <option value="ATOM/USD">ATOM/USD</option>
+		  <option value="BAT/USD">BAT/USD</option>
+		  <option value="BCH/USD">BCH/USD</option>
+		  <option value="BNB/USD">BNB/USD</option>
+		  <option value="BTC/USD">BTC/USD</option>
+		  <option value="DASH/USD">DASH/USD</option>
+		  <option value="ENJ/USD">ENJ/USD</option>
+		  <option value="ETC/USD">ETC/USD</option>
+		  <option value="ETH/USD">ETH/USD</option>
+		  <option value="ICX/USD">ICX/USD</option>
+		  <option value="IOTA/USD">IOTA/USD</option>
+		  <option value="LINK/USD">LINK/USD</option>
+		  <option value="LTC/USD">LTC/USD</option>
+		  <option value="NANO/USD">NANO/USD</option>
+		  <option value="NEO/USD">NEO/USD</option>
+		  <option value="ONT/USD">ONT/USD</option>
+		  <option value="QTUM/USD">QTUM/USD</option>
+		  <option value="RVN/USD">RVN/USD</option>
+		  <option value="VET/USD">VET/USD</option>
+		  <option value="WAVES/USD">WAVES/USD</option>
+		  <option value="XLM/USD">XLM/USD</option>
+		  <option value="XRP/USD">XRP/USD</option>
+		  <option value="XTZ/USD">XTZ/USD</option>
+		  <option value="ZEC/USD">ZEC/USD</option>
+		  <option value="ZIL/USD">ZIL/USD</option>
+		  <option value="ZRX/USD">ZRX/USD</option>
+		</select>
+
+		<form action="/" method="post">
+			<button type="submit">Submit</button>
+		</form>
+
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Menu Section -->
+  <div class="w3-row w3-padding-64" id="menu">
+    <div class="w3-col l6 w3-padding-large">
+      <h1 class="w3-center">Our Currencies</h1><br>
+      <h4>ADA - Cardano</h4>
+      <h4>ALGO - Algorand</h4>
+      <h4>Atom - Cosmos</h4>
+      <h4>BAT - Basic Attention Token</h4>
+		<h4>BCH - Bitcoin Cash</h4>
+		<h4>BNB - Binance Coin</h4>
+		<h4>BTC - Bitcoin</h4>
+		<h4>DASH - Dash</h4>
+		<h4>ENJ - Enjin Coin</h4>
+		<h4>ETC - Ethereum Classic</h4>
+		<h4>ETH - Ethereum</h4>
+		<h4>ICX - ICON</h4>
+		<h4>IOTA - IOTA</h4>
+		<h4>LINK - Chainlink</h4>
+		<h4>LTC - Litecoin</h4>
+		<h4>NANO - Nano</h4>
+		<h4>NEO - Neo</h4>
+		<h4>ONT - Ontology</h4>
+		<h4>QTUM - Qtum</h4>
+		<h4>RVN - Ravencoin</h4>
+		<h4>VET - VeChain</h4>
+		<h4>WAVES - Waves</h4>
+		<h4>XLM - Stellar</h4>
+		<h4>XRP - XRP (Ripple)</h4>
+		<h4>XTZ - Tezos</h4>
+		<h4>ZEC - Zcash</h4>
+		<h4>ZIL - Ziliqa</h4>
+		<h4>ZRX - 0x</h4>
 
 
-<!--	{% for l in t %}-->
-<!--		{{l}}-->
-<!--	{% endfor %}-->
 
-	<div class="results">
-		<pre>{{response}}</pre>
-	</div>
+
+
+
+    </div>
+
+  </div>
+
+  <hr>
+
+  <!-- Contact Section -->
+  <div class="w3-container w3-padding-64" id="contact">
+    <h1>Contact</h1><br>
+    <p style = "color:crimson">We offer an approach to financial instruments unlike most . For any questions or concerns, please contact us by email.</p>
+    <p class="w3-text-blue-grey w3-large"><b>Alpha Seekers Fund, New York, NY</b></p>
+    <p style = "color:crimson">You can contact us by email triangular@arbitrage.com</p>
+  </div>
+
+<!-- End page content -->
+</div>
+
 </body>
 </html>

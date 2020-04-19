@@ -20,15 +20,22 @@ app = Flask(__name__)
 
 
 @app.route('/', methods=['GET', 'POST'])
-def basic():
+def home():
+
     if request.method == "POST":
         todo = request.form['name']
-        names = db.child("crypto-arbitrage-6575e").child("Opportunities").get()
+        names = db.child("crypto-arbitrage-6575e").child("Opportunities").get(1)
+        names2 = db.child("crypto-arbitrage-6575e.appspot.com/Graph.png")
         name = names.val()
+        name2 = names2.value
         response = json.dumps(name, sort_keys=True, indent=4, separators=(',', ': '))
+        response2 = json.dumps(name2, sort_keys=True, indent=4)
+        render_template('index.html', response=response2)
         return render_template('index.html', response=response)
+
+
     return render_template('index.html')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
