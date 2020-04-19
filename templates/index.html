@@ -20,11 +20,13 @@ h1, h2, h3, h4, h5, h6 {
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-coral w3-padding w3-card" style="letter-spacing:4px;">
-    <a href="#home" class="w3-bar-item w3-button" style = "color:crimson">Alpha Seekers</a>
+	  <a href="#home" class="w3-bar-item w3-button" style = "color:crimson" ><b>Alpha Seekers</b></a>
     <!-- Right-sided navbar links. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
-      <a href="#about" class="w3-bar-item w3-button" style = "color:crimson">About</a>
-      <a href="#contact" class="w3-bar-item w3-button" style = "color:crimson">Contact</a>
+      <a href="#about" class="w3-bar-item w3-button" style = "color:crimson"><b>About</b></a>
+		<a href="#ourcurrencies" class="w3-bar-item w3-button" style = "color:crimson"><b>Our Currencies</b></a>
+		<a href="#opportunities" class="w3-bar-item w3-button" style = "color:crimson"><b>Opportunities</b></a>
+      <a href="#contact" class="w3-bar-item w3-button" style = "color:crimson"><b>Contact</b></a>
     </div>
   </div>
 </div>
@@ -42,41 +44,7 @@ h1, h2, h3, h4, h5, h6 {
     <div class="w3-col m6 w3-padding-large">
       <h1 class="w3-center">About Alpha Seekers</h1><br>
       <h5 class="w3-center">Tradition since 2020</h5>
-      <label for="currencies" style= "color:crimson" >Choose a starting Node:</label>
-		<select id="currencies">
-		  <option value="ADA/USD">ADA/USD</option>
-		  <option value="ALGO/USD">ALGO/USD</option>
-		  <option value="ATOM/USD">ATOM/USD</option>
-		  <option value="BAT/USD">BAT/USD</option>
-		  <option value="BCH/USD">BCH/USD</option>
-		  <option value="BNB/USD">BNB/USD</option>
-		  <option value="BTC/USD">BTC/USD</option>
-		  <option value="DASH/USD">DASH/USD</option>
-		  <option value="ENJ/USD">ENJ/USD</option>
-		  <option value="ETC/USD">ETC/USD</option>
-		  <option value="ETH/USD">ETH/USD</option>
-		  <option value="ICX/USD">ICX/USD</option>
-		  <option value="IOTA/USD">IOTA/USD</option>
-		  <option value="LINK/USD">LINK/USD</option>
-		  <option value="LTC/USD">LTC/USD</option>
-		  <option value="NANO/USD">NANO/USD</option>
-		  <option value="NEO/USD">NEO/USD</option>
-		  <option value="ONT/USD">ONT/USD</option>
-		  <option value="QTUM/USD">QTUM/USD</option>
-		  <option value="RVN/USD">RVN/USD</option>
-		  <option value="VET/USD">VET/USD</option>
-		  <option value="WAVES/USD">WAVES/USD</option>
-		  <option value="XLM/USD">XLM/USD</option>
-		  <option value="XRP/USD">XRP/USD</option>
-		  <option value="XTZ/USD">XTZ/USD</option>
-		  <option value="ZEC/USD">ZEC/USD</option>
-		  <option value="ZIL/USD">ZIL/USD</option>
-		  <option value="ZRX/USD">ZRX/USD</option>
-		</select>
-
-		<form action="/" method="post">
-			<button type="submit">Submit</button>
-		</form>
+		<p class="w3-large" style = "color:crimson">We are a firm specializing in statistical anlysis of Cryptocurrency trading prices in order to identify profitable triangular arbitrage opportunities.</p>
 
     </div>
   </div>
@@ -84,7 +52,7 @@ h1, h2, h3, h4, h5, h6 {
   <hr>
 
   <!-- Menu Section -->
-  <div class="w3-row w3-padding-64" id="menu">
+  <div class="w3-row w3-padding-64" id="ourcurrencies">
     <div class="w3-col l6 w3-padding-large">
       <h1 class="w3-center">Our Currencies</h1><br>
       <h4>ADA - Cardano</h4>
@@ -126,6 +94,48 @@ h1, h2, h3, h4, h5, h6 {
   </div>
 
   <hr>
+
+	<div class="w3-row w3-padding-64" id="opportunities">
+    <div class="w3-col l6 w3-padding-large">
+      <h1 class="w3-center">Opportunities</h1><br>
+	<label for="currencies" style= "color:crimson" >Choose a starting Node:</label>
+		<select id="currencies">
+		  <option value="ADA/USD">ADA/USD</option>
+		  <option value="ALGO/USD">ALGO/USD</option>
+		  <option value="ATOM/USD">ATOM/USD</option>
+		  <option value="BAT/USD">BAT/USD</option>
+		  <option value="BCH/USD">BCH/USD</option>
+		  <option value="BNB/USD">BNB/USD</option>
+		  <option value="BTC/USD">BTC/USD</option>
+		  <option value="DASH/USD">DASH/USD</option>
+		  <option value="ENJ/USD">ENJ/USD</option>
+		  <option value="ETC/USD">ETC/USD</option>
+		  <option value="ETH/USD">ETH/USD</option>
+		  <option value="ICX/USD">ICX/USD</option>
+		  <option value="IOTA/USD">IOTA/USD</option>
+		  <option value="LINK/USD">LINK/USD</option>
+		  <option value="LTC/USD">LTC/USD</option>
+		  <option value="NANO/USD">NANO/USD</option>
+		  <option value="NEO/USD">NEO/USD</option>
+		  <option value="ONT/USD">ONT/USD</option>
+		  <option value="QTUM/USD">QTUM/USD</option>
+		  <option value="RVN/USD">RVN/USD</option>
+		  <option value="VET/USD">VET/USD</option>
+		  <option value="WAVES/USD">WAVES/USD</option>
+		  <option value="XLM/USD">XLM/USD</option>
+		  <option value="XRP/USD">XRP/USD</option>
+		  <option value="XTZ/USD">XTZ/USD</option>
+		  <option value="ZEC/USD">ZEC/USD</option>
+		  <option value="ZIL/USD">ZIL/USD</option>
+		  <option value="ZRX/USD">ZRX/USD</option>
+		</select>
+
+		<form action="/" method="post">
+			<button type="submit">Submit</button>
+		</form>
+	</div>
+	</div>
+	<hr>
 
   <!-- Contact Section -->
   <div class="w3-container w3-padding-64" id="contact">
