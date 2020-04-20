@@ -19,16 +19,23 @@ db = firebase2.database()
 app = Flask(__name__)
 
 
-
+#TODO finalize flask with working opportunities list
 @app.route('/', methods=['GET', 'POST'])
 def home():
+
     if request.method == "POST":
-        '''todo = request.form'''
-        names = db.child("crypto-arbitrage-6575e").child("Opportunities").child().get()
-        results = names.val()
-        response = json.dumps(str(results), sort_keys=True, indent=4, separators=(',', ': '))
-        return render_template('newindex.html', response=response)
-    return render_template('newindex.html')
+        nodes = db.child("crypto-arbitrage-6575e").child("Nodes")
+        node_names = nodes.val()
+
+        for n in node_names:
+            #TODO save option selection from drop down list into variable and use it here
+            if (option_selection == n):
+                opportunities = db.child("crypto-arbitrage-6575e").child("Opportunities").child().get(1)
+                results = opportunities.val()
+                response = json.dumps(str(results), sort_keys=True, indent=4, separators=(',', ': '))
+                return render_template('index.html', response=response)
+
+    return render_template('index.html')
 
 
 if __name__ == '__main__':

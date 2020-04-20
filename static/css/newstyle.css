@@ -3,10 +3,13 @@
     margin: 0;
     padding: 0;
 }
-
+hr.new1 {
+  border-top: 5px solid grey;
+}
 body
 {
 font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+padding-top: 40px;
 }
 
 #nav-bar
@@ -18,7 +21,7 @@ font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
 
 .navbar
 {
-    background-image: linear-gradient(to right, #BB0C00, #000000);
+    background-image: linear-gradient(to right, #00C8E7, #FF7AB5);
     padding: 0 !important;
     height: 100px;
 }
@@ -46,7 +49,7 @@ font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
 
 .fa-bars
 {
-    color: #000000;
+    color: #FFFFFF;
     font-size: 30px !important;
 }
 
@@ -58,7 +61,7 @@ font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
 /*---------banner section------------*/
 #banner
 {
-    background-image: linear-gradient(to right, #BB0C00, #000000);
+    background-image: linear-gradient(to right, #00C8E7, #FF7AB5);
     color: #FFFFFF;
     padding-top: 5% ;
 }
