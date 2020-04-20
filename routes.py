@@ -27,8 +27,8 @@ def home():
         names = db.child("crypto-arbitrage-6575e").child("Opportunities").child().get()
         results = names.val()
         response = json.dumps(str(results), sort_keys=True, indent=4, separators=(',', ': '))
-        return render_template('index.html', response=response)
-    return render_template('index.html')
+        return render_template('newindex.html', response=response)
+    return render_template('newindex.html')
 
 
 if __name__ == '__main__':
