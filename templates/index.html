@@ -7,7 +7,7 @@
 <style>
 body {
 	font-family: "Times New Roman", Georgia, Serif;
-	background-color: #333333;
+	background-color: black;
 }
 h1, h2, h3, h5, h6 {
   font-family: "Playfair Display";
@@ -45,7 +45,12 @@ h1, h2, h3, h5, h6 {
     <div class="w3-col m6 w3-padding-large">
       <h1 class="w3-center">About Alpha Seekers</h1><br>
       <h5 class="w3-center">Tradition since 2020</h5>
-		<p class="w3-text-blue-grey w3-center w3-large">We are a firm specializing in statistical anlysis of Cryptocurrency trading prices in order to identify profitable triangular arbitrage opportunities.</p>
+		<p class="w3-text-blue-grey w3-center w3-large">We are a firm specializing in
+			statistical anlysis of Cryptocurrency trading prices in order to identify
+			profitable triangular arbitrage opportunities. Cryptocurrencies tend to
+			be very volatile markets, so arbitrage opportunities become more likely. Our
+			plan is to take advantage of that to maximixe profits while eliminating risk
+			for our clients. </p>
 
     </div>
   </div>
@@ -122,14 +127,16 @@ h1, h2, h3, h5, h6 {
 			  <option value="ZIL/USD">ZIL/USD</option>
 			  <option value="ZRX/USD">ZRX/USD</option>
 			</select>
-			<button type="button" onclick="myFunction()">Submit</button>
-			<p class = "w3-text-blue-grey w3-large" id="opportunitiesList">None</p>
 
-			<script>
-				function myFunction() {
-					var x;
-  				document.getElementById("opportunitiesList").innerHTML = x;}
-			</script>
+			<form action="/" method="post">
+ 				<button type="submit">Submit</button>
+ 			</form>
+
+
+ 	<div class="results">
+ 		<p class="w3-text-blue-grey w3-center w3-large">{{response}}</p>
+ 	</div>
+
 		</form>
 	</div>
 
@@ -142,10 +149,13 @@ h1, h2, h3, h5, h6 {
     <p class="w3-text-blue-grey w3-large"><b>Alpha Seekers Fund, LUC, Chicago, IL</b></p>
     <p class="w3-text-blue-grey w3-large">You can contact us by email triangular@arbitrage.com</p>
   </div>
-
 <!-- End page content -->
 </div>
-<script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+
+
+
+
+
 </body>
 
 </html>

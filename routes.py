@@ -24,9 +24,9 @@ app = Flask(__name__)
 def home():
     if request.method == "POST":
         '''todo = request.form'''
-        names = db.child("crypto-arbitrage-6575e").child("Opportunities").child()
-        name = names.get()
-        response = json.dumps(str(name), sort_keys=True, indent=4, separators=(',', ': '))
+        names = db.child("crypto-arbitrage-6575e").child("Opportunities").child().get()
+        results = names.val()
+        response = json.dumps(str(results), sort_keys=True, indent=4, separators=(',', ': '))
         return render_template('index.html', response=response)
     return render_template('index.html')
 

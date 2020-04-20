@@ -62,7 +62,7 @@ print(G.number_of_nodes())
 print(G.edges.data())
 print(G.number_of_edges())
 
-#nx.draw_circular(G)
+#Graph = nx.draw_circular(G)
 #plt.show()
 
 firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/", "")
