@@ -28,32 +28,33 @@ def dropdown():
 '''
 
 
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    currencies = []
+    items = db.child("crypto-arbitrage-6575e").child("Nodes").get()
+    for n in items.each():
+        result = n.val()
+        currencies.append(result)
 
     if request.method == "GET":
-        currencies = []
-        items = db.child("crypto-arbitrage-6575e").child("Nodes").get()
-        for n in items.each():
-            result = n.val()
-            currencies.append(result)
         return render_template('index.html', currencies=currencies)
-    return render_template('index.html')
 
-'''
     if request.method == "POST":
-        opportunities_list = []
-        opportunities = db.child("crypto-arbitrage-6575e").child("Opportunities").child().get()
-        for n in opportunities.each():
-            if n == selection:
-                result = n.val()
-                opportunities_list.append(result)
+        currency = request.form['currency']
+        related_opportunities = []
+        all_opportunities = db.child("crypto-arbitrage-6575e").child("Opportunities").child().get()
 
-        return render_template('index.html', opportunities_list=opportunities_list)
-'''
+        for n in all_opportunities.each():
+            opportunities_list = n.val()
+
+            for opportunities in opportunities_list:
+                if currency == opportunities[1]:
+                    related_opportunities.append(opportunities)
+
+        return render_template('index.html', currencies=currencies, opportunities_list=related_opportunities)
 
 
 if __name__ == '__main__':
-    app.run()
-def __call__():
-    app.run()
+    app.run(port=8000)
+

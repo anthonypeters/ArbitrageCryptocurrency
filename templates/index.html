@@ -98,21 +98,24 @@ h1, h2, h3, h5, h6 {
 
 		<label for="currencies" class="w3-text-blue-grey w3-large" >Choose a starting Node:</label>
 
-		<form action="/" method="get">
+		<form action="/" method="post">
 			<select id="currencies" name="currency" method="GET" action="/">
 			  <option value="{{currencies[0]}}" selected>{{currencies[0]}}</option>
 				{% for currency in currencies[1:] %}
 				<option value="{{currency}}">{{currency}}</option>
 				{% endfor %}
+
 			</select>
+			<button type="submit">Submit</button>
 		</form>
 
-			<form action="/" method="post">
- 				<button type="submit">Submit</button>
- 			</form>
 
 		<div class="results">
-			<p class="w3-text-blue-grey w3-center w3-large">{{response}}</p>
+			{% for opportunities in opportunities_list %}
+				<p class="w3-text-blue-grey w3-center w3-large">
+					{{"$%.4f"|format(opportunities[0])}} = {{opportunities[1]}} => {{opportunities[2]}} => {{opportunities[3]}} => {{opportunities[4]}}
+				</p>
+			{% endfor %}
  		</div>
 
 

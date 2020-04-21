@@ -8,7 +8,6 @@ import ccxt
 import numpy as np
 import networkx as nx
 import logic
-import routes
 from firebase import firebase
 import matplotlib.pyplot as plt
 
@@ -73,4 +72,3 @@ firebase.delete('crypto-arbitrage-6575e', "Opportunities")
 cycles = logic.cycles_algorithm(G)
 logic.n_hayward(G, cycles)
 
-routes.__call__()
