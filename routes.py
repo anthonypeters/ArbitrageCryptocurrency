@@ -56,5 +56,8 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(port=8000)
+    app.run()
 
+
+def __call__():
+    app.run()
