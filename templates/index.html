@@ -95,47 +95,26 @@ h1, h2, h3, h5, h6 {
 
 	<div class="w3-row w3-padding-64" id="opportunities">
       <h1 class="w3-center">Opportunities</h1><br>
-	<label for="currencies" class="w3-text-blue-grey w3-large" >Choose a starting Node:</label>
-		<form action="/" method="post">
-			<select id="currencies">
-			  <option value="ADA/USD">ADA/USD</option>
-			  <option value="ALGO/USD">ALGO/USD</option>
-			  <option value="ATOM/USD">ATOM/USD</option>
-			  <option value="BAT/USD">BAT/USD</option>
-			  <option value="BCH/USD">BCH/USD</option>
-			  <option value="BNB/USD">BNB/USD</option>
-			  <option value="BTC/USD">BTC/USD</option>
-			  <option value="DASH/USD">DASH/USD</option>
-			  <option value="ENJ/USD">ENJ/USD</option>
-			  <option value="ETC/USD">ETC/USD</option>
-			  <option value="ETH/USD">ETH/USD</option>
-			  <option value="ICX/USD">ICX/USD</option>
-			  <option value="IOTA/USD">IOTA/USD</option>
-			  <option value="LINK/USD">LINK/USD</option>
-			  <option value="LTC/USD">LTC/USD</option>
-			  <option value="NANO/USD">NANO/USD</option>
-			  <option value="NEO/USD">NEO/USD</option>
-			  <option value="ONT/USD">ONT/USD</option>
-			  <option value="QTUM/USD">QTUM/USD</option>
-			  <option value="RVN/USD">RVN/USD</option>
-			  <option value="VET/USD">VET/USD</option>
-			  <option value="WAVES/USD">WAVES/USD</option>
-			  <option value="XLM/USD">XLM/USD</option>
-			  <option value="XRP/USD">XRP/USD</option>
-			  <option value="XTZ/USD">XTZ/USD</option>
-			  <option value="ZEC/USD">ZEC/USD</option>
-			  <option value="ZIL/USD">ZIL/USD</option>
-			  <option value="ZRX/USD">ZRX/USD</option>
+
+		<label for="currencies" class="w3-text-blue-grey w3-large" >Choose a starting Node:</label>
+
+		<form action="/" method="get">
+			<select id="currencies" name="currency" method="GET" action="/">
+			  <option value="{{currencies[0]}}" selected>{{currencies[0]}}</option>
+				{% for currency in currencies[1:] %}
+				<option value="{{currency}}">{{currency}}</option>
+				{% endfor %}
 			</select>
 		</form>
+
 			<form action="/" method="post">
  				<button type="submit">Submit</button>
  			</form>
 
+		<div class="results">
+			<p class="w3-text-blue-grey w3-center w3-large">{{response}}</p>
+ 		</div>
 
- 	<div class="results">
- 		<p class="w3-text-blue-grey w3-center w3-large">{{response}}</p>
- 	</div>
 
 		</form>
 	</div>

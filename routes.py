@@ -20,22 +20,37 @@ app = Flask(__name__)
 
 
 #TODO finalize flask with working opportunities list
+'''
+@app.route('/', methods=['GET'])
+def dropdown():
+    currencies = ['Red', 'Blue', 'Black']
+    return render_template(test.html, colors = colors)
+'''
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
 
-    if request.method == "POST":
-        nodes = db.child("crypto-arbitrage-6575e").child("Nodes")
-        node_names = nodes.val()
-
-        for n in node_names:
-            #TODO save option selection from drop down list into variable and use it here
-            if (option_selection == n):
-                opportunities = db.child("crypto-arbitrage-6575e").child("Opportunities").child().get(1)
-                results = opportunities.val()
-                response = json.dumps(str(results), sort_keys=True, indent=4, separators=(',', ': '))
-                return render_template('index.html', response=response)
-
+    if request.method == "GET":
+        currencies = []
+        items = db.child("crypto-arbitrage-6575e").child("Nodes").get()
+        for n in items.each():
+            result = n.val()
+            currencies.append(result)
+        return render_template('index.html', currencies=currencies)
     return render_template('index.html')
+
+'''
+    if request.method == "POST":
+        opportunities_list = []
+        opportunities = db.child("crypto-arbitrage-6575e").child("Opportunities").child().get()
+        for n in opportunities.each():
+            if n == selection:
+                result = n.val()
+                opportunities_list.append(result)
+
+        return render_template('index.html', opportunities_list=opportunities_list)
+'''
 
 
 if __name__ == '__main__':

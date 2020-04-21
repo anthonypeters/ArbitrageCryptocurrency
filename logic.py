@@ -3,6 +3,7 @@ from firebase import firebase
 
 firebase = firebase.FirebaseApplication("https://crypto-arbitrage-6575e.firebaseio.com/", "")
 
+
 def replace_currency(substring, currency_list):
     for n in currency_list:
         if substring in str(n):
@@ -49,8 +50,8 @@ def n_hayward(graph, cycles):
                         tuple = (value, first_node, second_node, third_node, last_node)
                         valueList.append(tuple)
 
-
         x += 1
+
     print(len(valueList))
     valueList.sort(reverse=True)
     print(valueList)
