@@ -55,3 +55,5 @@ def home():
 
 if __name__ == '__main__':
     app.run()
+def __call__():
+    app.run()
