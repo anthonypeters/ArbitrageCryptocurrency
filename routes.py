@@ -19,16 +19,6 @@ db = firebase2.database()
 app = Flask(__name__)
 
 
-#TODO finalize flask with working opportunities list
-'''
-@app.route('/', methods=['GET'])
-def dropdown():
-    currencies = ['Red', 'Blue', 'Black']
-    return render_template(test.html, colors = colors)
-'''
-
-
-
 @app.route('/', methods=['GET', 'POST'])
 def home():
     currencies = []
@@ -51,6 +41,8 @@ def home():
             for opportunities in opportunities_list:
                 if currency == opportunities[1]:
                     related_opportunities.append(opportunities)
+                    if len(related_opportunities) == 10:
+                        break
 
         return render_template('index.html', currencies=currencies, opportunities_list=related_opportunities)
 

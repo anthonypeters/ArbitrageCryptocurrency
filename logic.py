@@ -18,7 +18,7 @@ def cycles_algorithm(graph):
 
     for i in permutations_list:
         a, b = i
-        if a != b:
+        if a != b and a[0:3] != b[0:3]:
             cycles.append((a, b))
 
     print(cycles)

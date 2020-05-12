@@ -49,7 +49,7 @@ while n < len(currency_pairs):
         bid = book['bids'][0][0]
         weight = ask / bid
         edge = [currency_pairs[n], currency_pairs[j], weight]
-        if edge[0] != edge[1]:
+        if edge[0] != edge[1] and edge[0][0:3] != edge[1][0:3]:
             G.add_edge(edge[0], edge[1], weight=edge[2])
         j += 1
 
